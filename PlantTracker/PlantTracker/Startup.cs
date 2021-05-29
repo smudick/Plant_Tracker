@@ -45,6 +45,7 @@ namespace PlantTracker
             services.AddControllers();
             services.AddSingleton(Configuration);
             services.AddTransient<UserRepository>();
+            services.AddTransient<PlantDataRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
