@@ -22,6 +22,22 @@ namespace PlantTracker.Data
             var sql = @"SELECT * 
                         FROM [User]";
             return db.Query<User>(sql).ToList();
+        } 
+        public User GetUserById(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT * 
+                        FROM [User]
+                        WHERE [User].Id = @id";
+            return db.QueryFirstOrDefault<User>(sql, new { id = id });
+        }
+        public User GetUserByFirebaseUid(int uid)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT * 
+                        FROM [User]
+                        WHERE [User].FirebaseUid = @uid";
+            return db.QueryFirstOrDefault<User>(sql, new { uid = uid });
         }
     }
 }

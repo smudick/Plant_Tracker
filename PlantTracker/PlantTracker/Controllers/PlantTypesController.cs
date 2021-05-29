@@ -24,5 +24,10 @@ namespace PlantTracker.Controllers
         {
             return Ok(_repo.GetAllTypes());
         }
+        [HttpGet("{id}")]
+        public IActionResult GetTypeById(int id)
+        {
+            return Ok(_repo.GetTypeById(id));
+        }
     }
 }
