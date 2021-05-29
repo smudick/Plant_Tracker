@@ -23,5 +23,13 @@ namespace PlantTracker.Data
                         FROM Plant_Types";
             return db.Query<PlantType>(sql).ToList();
         }
+        public PlantType GetTypeById(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT * 
+                        FROM Plant_Types
+                            WHERE Plant_Types.id = @id";
+            return db.QueryFirstOrDefault<PlantType>(sql, new { id = id });
+        }
     }
 }
