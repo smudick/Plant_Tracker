@@ -63,6 +63,24 @@ namespace PlantTracker.Data
                                 [Next_Watered_Date] = @Next_Watered_Date
                             WHERE [User_Plants].id = @id";
             db.Execute(sql, userPlant);
+        }
+        public void UpdateUserPlant(UserPlants userPlant)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var id = userPlant.Id;
+            var Notes = userPlant.Notes;
+            var User_Water_Time = userPlant.User_Water_Time;
+            var User_Sunlight = userPlant.User_Sunlight;
+            var Next_Watered_Date = userPlant.Last_Watered_Date.AddDays(userPlant.User_Water_Time);
+            userPlant.Next_Watered_Date = Next_Watered_Date;
+            var sql = @"UPDATE [dbo].[User_Plants]
+                            SET
+                                [Notes] = @Notes,
+		                        [User_Water_Time] = @User_Water_Time,
+		                        [User_Sunlight] = @User_Sunlight,
+                                [Next_Watered_Date] = @Next_Watered_Date
+                            WHERE [User_Plants].id = @id";
+            db.Execute(sql, userPlant);
 
         }
     }

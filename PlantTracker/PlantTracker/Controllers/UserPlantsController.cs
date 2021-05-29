@@ -37,5 +37,11 @@ namespace PlantTracker.Controllers
             _repo.WaterPlant(userPlant);
             return Created($"api/UserPlants/{userPlant.Id}", userPlant);
         }
+        [HttpPut("update")]
+        public IActionResult UpdateUserPlant(UserPlants userPlant)
+        {
+            _repo.UpdateUserPlant(userPlant);
+            return Created($"api/UserPlants/{userPlant.Id}", userPlant);
+        }
     }
 }
