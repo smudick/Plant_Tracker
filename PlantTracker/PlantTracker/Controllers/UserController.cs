@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlantTracker.Data;
+using PlantTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,12 @@ namespace PlantTracker.Controllers
         public IActionResult GetUserByFirebaseUid(int uid)
         {
             return Ok(_repo.GetUserByFirebaseUid(uid));
+        }
+        [HttpPost]
+        public IActionResult CreateUser(User user)
+        {
+            _repo.CreateUser(user);
+            return Created($"api/Users/{user.Id}", user);
         }
     }
 }
