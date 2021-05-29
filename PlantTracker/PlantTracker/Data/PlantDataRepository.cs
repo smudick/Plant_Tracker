@@ -23,5 +23,27 @@ namespace PlantTracker.Data
                         FROM Plant_Data";
             return db.Query<PlantData>(sql).ToList();
         }
+
+        public PlantData GetPlantById(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT * 
+                        FROM Plant_Data
+                            WHERE Plant_Data.Id = @id";
+            return db.QueryFirstOrDefault<PlantData>(sql, new { id = id });
+        }
+
+        public List<PlantData> GetAllPlantsForSingleUser(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT pd.*
+                        FROM Plant_Data pd
+                            JOIN User_Plants up
+                                ON up.Plant_Id = pd.id
+                            JOIN [User] u
+                                ON u.id = up.User_Id
+                            WHERE up.User_Id = @id";
+            return db.Query<PlantData>(sql, new { id = id }).ToList();
+        }
     }
 }

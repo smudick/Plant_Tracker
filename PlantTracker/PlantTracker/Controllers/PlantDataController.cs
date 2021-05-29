@@ -24,5 +24,17 @@ namespace PlantTracker.Controllers
         {
             return Ok(_repo.GetAllPlants());
         }
-    }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPlantById(int id)
+        {
+            return Ok(_repo.GetPlantById(id));
+        }
+
+        [HttpGet("user/{UserId}")]
+        public IActionResult GetPlantsByUserId(int UserId)
+        {
+            return Ok(_repo.GetAllPlantsForSingleUser(UserId));
+        }
+    } 
 }
