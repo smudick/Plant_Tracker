@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlantTracker.Data;
+using PlantTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,12 @@ namespace PlantTracker.Controllers
         public IActionResult GetAllUserPlants()
         {
             return Ok(_repo.GetAllUserPlants());
+        }
+        [HttpPost]
+        public IActionResult AddPlant(UserPlants userPlants)
+        {
+            _repo.AddPlantToUser(userPlants);
+            return Created($"api/UserPlants/{userPlants.Id}", userPlants);
         }
     }
 }

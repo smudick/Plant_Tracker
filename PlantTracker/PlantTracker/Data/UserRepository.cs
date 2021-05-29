@@ -39,5 +39,25 @@ namespace PlantTracker.Data
                         WHERE [User].FirebaseUid = @uid";
             return db.QueryFirstOrDefault<User>(sql, new { uid = uid });
         }
+        public void CreateUser(User user)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var User_Created_Date = DateTime.Now;
+            user.User_Created_Date = User_Created_Date;
+            var sql = @"INSERT INTO [dbo].[User]
+                            ([First_Name]
+                            ,[Last_Name]
+                            ,[Profile_Picture]
+                            ,[User_Created_Date]
+                            ,[Firebase_Uid])
+                        VALUES                 
+                            (@First_Name
+                            ,@Last_Name
+                            ,@Profile_Picture
+                            ,@User_Created_Date
+                            ,@Firebase_Uid)";
+            var id = db.ExecuteScalar<int>(sql, user);
+            user.Id = id;
+        }
     }
 }
