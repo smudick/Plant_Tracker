@@ -89,7 +89,13 @@ namespace PlantTracker.Data
                                 [Next_Watered_Date] = @Next_Watered_Date
                             WHERE [User_Plants].id = @id";
             db.Execute(sql, userPlant);
-
+        }
+        public void DeleteUserPlant(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"DELETE FROM [dbo].[User_Plants]
+                            WHERE [User_Plants].Id = @id";
+            db.Execute(sql, new { id = id });
         }
     }
 }
