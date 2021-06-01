@@ -23,6 +23,14 @@ namespace PlantTracker.Data
                         FROM User_Plants";
             return db.Query<UserPlants>(sql).ToList();
         }
+        public UserPlants GetUserPlantById(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT * 
+                        FROM User_Plants
+                        WHERE User_Plants.Id = @id";
+            return db.QueryFirstOrDefault<UserPlants>(sql, new { id = id });
+        }
         public void AddPlantToUser(UserPlants userPlants)
         {
             using var db = new SqlConnection(ConnectionString);

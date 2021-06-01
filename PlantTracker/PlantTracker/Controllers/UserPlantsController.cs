@@ -25,6 +25,11 @@ namespace PlantTracker.Controllers
         {
             return Ok(_repo.GetAllUserPlants());
         }
+        [HttpGet("{id}")]
+        public IActionResult GetUserPlantById(int id)
+        {
+            return Ok(_repo.GetUserPlantById(id));
+        }
         [HttpPost]
         public IActionResult AddPlant(UserPlants userPlants)
         {
@@ -40,6 +45,8 @@ namespace PlantTracker.Controllers
         [HttpPut("update")]
         public IActionResult UpdateUserPlant(UserPlants userPlant)
         {
+            var existingUserPlant = _repo.GetUserPlantById(userPlant.Id);
+            userPlant.Last_Watered_Date = existingUserPlant.Last_Watered_Date;
             _repo.UpdateUserPlant(userPlant);
             return Created($"api/UserPlants/{userPlant.Id}", userPlant);
         }
