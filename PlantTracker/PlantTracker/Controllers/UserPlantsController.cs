@@ -50,5 +50,11 @@ namespace PlantTracker.Controllers
             _repo.UpdateUserPlant(userPlant);
             return Created($"api/UserPlants/{userPlant.Id}", userPlant);
         }
+        [HttpDelete("delete/{id}")]
+        public IActionResult DeleteUserPlant(int id)
+        {
+            _repo.DeleteUserPlant(id);
+            return Ok();
+        }
     }
 }
