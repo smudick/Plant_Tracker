@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import {PlantProps} from '../../Helpers/Interfaces/PlantInterfaces';
 
 export const PlantCard = ({plant}: PlantProps): JSX.Element => (
