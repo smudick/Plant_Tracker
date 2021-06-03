@@ -27,7 +27,7 @@ class Home extends Component {
         return (
             <div>
                 <h1>Home</h1>
-                <div className="d-flex flex-column justify-content-center m-4">
+                <div className="d-flex m-4">
                 {cards}
                 </div>
             </div>
