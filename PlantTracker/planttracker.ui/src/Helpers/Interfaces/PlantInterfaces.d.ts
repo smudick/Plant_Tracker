@@ -19,6 +19,7 @@ declare module "PlantTypes" {
     Bloom: string;
     Watering_Interval: number;
     User_Id: number;
+    Image_Url: string;
   }
   type PlantProps = {
       plant: Plant
