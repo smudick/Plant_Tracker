@@ -25,5 +25,6 @@ namespace PlantTracker.Models
         public string Bloom { get; set; }
         public int Watering_Interval { get; set; }
         public int User_Id { get; set; }
+        public string Image_Url { get; set; }
     }
 }
