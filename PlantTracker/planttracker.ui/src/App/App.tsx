@@ -4,6 +4,7 @@ import Routes from '../Helpers/routes';
 import './App.scss';
 import Navigation from '../Components/Navbar/Navbar';
 import {User} from '../Helpers/Interfaces/UserInterface';
+import UserData from '../Helpers/Data/UserData';
 
 type AppState = {
   user?: User | boolean;
@@ -12,6 +13,13 @@ type AppState = {
 class App extends Component<AppState> {
   state = {
     user: null
+  }
+  componentDidMount = (): void => {
+    UserData.getUserById(1).then((response) => {
+      this.setState({
+        user: response
+      })
+    })
   }
 
   render(): JSX.Element {

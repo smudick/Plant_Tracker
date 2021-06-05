@@ -3,21 +3,25 @@ import PlantData from "../Helpers/Data/PlantData";
 import { PlantCard } from "../Components/Cards/PlantCard";
 import { Plant } from "../Helpers/Interfaces/PlantInterfaces";
 import { SearchProps } from "../Helpers/Interfaces/SearchInterfaces";
+import {User} from '../Helpers/Interfaces/UserInterface';
 
 type SearchState = {
   results?: Plant[];
   searchTerm: string;
+  user: User;
 };
 
 class Results extends Component<SearchProps, SearchState> {
   state: SearchState = {
     results: [],
     searchTerm: "",
+    user: {}
   };
 
   componentDidMount(): void {
     this.setState({
       searchTerm: this.props.match.params.term,
+      user: this.props.location.state?.user
     });
   }
   getProductsFromSearch = (): void => {
