@@ -35,5 +35,11 @@ declare module "PlantTypes" {
       location: RouteComponentProps["location"],
       user: User
   }
+  type UserPlantProps = {
+      plant: Plant,
+      userPlant: UserPlant,
+      user: User,
+      onUpdate?: () => void;
+  }
 }
-export {Plant, PlantProps, UserPlant}
+export {Plant, PlantProps, UserPlant, UserPlantProps}

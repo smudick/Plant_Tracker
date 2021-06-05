@@ -31,10 +31,17 @@ const getUserPlants = (userId: number) : Promise<UserPlant> => new Promise((reso
     }).catch((error) => reject(error))
 });
 
+const updateUserPlant = (userPlant: UserPlant) : Promise<UserPlant> => new Promise((resolve, reject) => {
+    axios.put(`${userPlantUrl}/update`, userPlant).then((response) => {
+        resolve(response.data);
+    }).catch((error) => reject(error))
+})
+ 
 const PlantData = {
     getAllPlants,
     getPlantType,
     getPlantsForSingleUser,
-    getUserPlants
+    getUserPlants,
+    updateUserPlant
 }
 export default PlantData;
