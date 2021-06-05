@@ -36,5 +36,12 @@ namespace PlantTracker.Controllers
         {
             return Ok(_repo.GetAllPlantsForSingleUser(UserId));
         }
+
+        [HttpGet("search/{term}")]
+        public IActionResult Search(string term)
+        {
+            var results = _repo.Search(term);
+            return Ok(results);
+        }
     } 
 }

@@ -36,12 +36,18 @@ const updateUserPlant = (userPlant: UserPlant) : Promise<UserPlant> => new Promi
         resolve(response.data);
     }).catch((error) => reject(error))
 })
+const search = (searchTerm: string) : Promise<Plant> => new Promise((resolve, reject) => {
+    axios.get(`${plantUrl}/search/${searchTerm}`).then((response) => {
+        resolve(response.data);
+    }).catch((error) => reject(error))
+})
  
 const PlantData = {
     getAllPlants,
     getPlantType,
     getPlantsForSingleUser,
     getUserPlants,
-    updateUserPlant
+    updateUserPlant,
+    search
 }
 export default PlantData;
