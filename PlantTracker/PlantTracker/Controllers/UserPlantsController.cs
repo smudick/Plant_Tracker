@@ -30,6 +30,11 @@ namespace PlantTracker.Controllers
         {
             return Ok(_repo.GetUserPlantById(id));
         }
+        [HttpGet("user/{id}")]
+        public IActionResult GetUserPlantByUserId(int id)
+        {
+            return Ok(_repo.GetUserPlantsByUserId(id));
+        }
         [HttpPost]
         public IActionResult AddPlant(UserPlants userPlants)
         {

@@ -7,6 +7,7 @@ import Results from '../Views/Results'
 import SinglePlant from '../Views/SinglePlant'
 import Watering from '../Views/Watering'
 import NotFound from '../Views/NotFound';
+import {PlantProps} from '../Helpers/Interfaces/PlantInterfaces';
 
 
 export default function Routes(): JSX.Element {
@@ -16,7 +17,7 @@ export default function Routes(): JSX.Element {
             <Route exact path='/Discovery' component={() => <Discovery/>} />
             <Route exact path='/PlantId' component={() => <PlantId/>} />
             <Route exact path='/Results' component={() => <Results/>} />
-            <Route exact path='/SinglePlant' component={() => <SinglePlant/>} />
+            <Route exact path='/details' component={(props: PlantProps) => <SinglePlant{...props}/>} />
             <Route exact path='/Watering' component={() => <Watering/>} />
             <Route exact path='/' component={() => <Home/>} />
             <Route component={NotFound} />

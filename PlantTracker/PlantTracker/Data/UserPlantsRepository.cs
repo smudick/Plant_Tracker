@@ -31,6 +31,14 @@ namespace PlantTracker.Data
                         WHERE User_Plants.Id = @id";
             return db.QueryFirstOrDefault<UserPlants>(sql, new { id = id });
         }
+        public List<UserPlants> GetUserPlantsByUserId(int userId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT * 
+                        FROM User_Plants
+                        WHERE User_Plants.User_Id = @userId";
+            return db.Query<UserPlants>(sql, new { userId = userId }).ToList();
+        }
         public void AddPlantToUser(UserPlants userPlants)
         {
             using var db = new SqlConnection(ConnectionString);

@@ -37,9 +37,16 @@ const Navigation = ({user} : NavProps): JSX.Element => {
               <NavLink href="/plantid">Plant Id</NavLink>
             </NavItem>
             <Search/>
+            {user &&
+            <NavItem className="ml-4">
+              <Button>Log Out</Button>
+            </NavItem>
+            }
+            {!user &&
             <NavItem className="ml-4">
               <Button>Log In</Button>
             </NavItem>
+            }
           </Nav>
         </Collapse>
       </Navbar>
