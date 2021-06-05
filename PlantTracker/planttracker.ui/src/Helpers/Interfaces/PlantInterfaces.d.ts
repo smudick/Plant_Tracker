@@ -21,8 +21,19 @@ declare module "PlantTypes" {
     User_Id: number;
     Image_Url: string;
   }
+  interface UserPlant {
+      Id: number;
+      User_Id: number;
+      Plant_Id: number;
+      Last_Watered_Date: Date;
+      Next_Watered_Date: Date;
+      Notes: String;
+      User_Water_Time: number;
+  }
   type PlantProps = {
-      plant: Plant
+      plant: Plant,
+      location: RouteComponentProps["location"],
+      user: User
   }
 }
-export {Plant, PlantProps}
+export {Plant, PlantProps, UserPlant}

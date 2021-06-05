@@ -2,26 +2,33 @@ import React, { Component } from "react";
 import PlantData from '../Helpers/Data/PlantData';
 import {Plant} from '../Helpers/Interfaces/PlantInterfaces'
 import {PlantCard} from '../Components/Cards/PlantCard';
+import {User} from '../Helpers/Interfaces/UserInterface';
+import UserData from "../Helpers/Data/UserData";
 
 type HomeState = {
     plants?: Plant[];
+    user?: User;
 }
 class Home extends Component {
     state: HomeState = {
-        plants: []
+        plants: [],
+        user: null,
     }
 
     componentDidMount(): void {
-        PlantData.getAllPlants().then((response: Plant[]) => {
-            this.setState({
-                plants: response
+        UserData.getUserById(1).then((response: User) => {
+            PlantData.getPlantsForSingleUser(response.id).then((plantResponse: Plant[]) => {
+                this.setState({
+                    plants: plantResponse,
+                    user: response
+                });
             });
         });
     }
     render(): JSX.Element {
-        const {plants} = this.state;
+        const {plants, user} = this.state;
         const plantCard = (plant: Plant): JSX.Element => {
-            return <PlantCard key={plant.id} plant={plant} />
+            return <PlantCard key={plant.id} plant={plant} user={user}/>
         };
         const cards = plants?.map(plantCard);
         return (
