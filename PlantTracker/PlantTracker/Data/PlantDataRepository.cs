@@ -45,5 +45,19 @@ namespace PlantTracker.Data
                             WHERE up.User_Id = @id";
             return db.Query<PlantData>(sql, new { id = id }).ToList();
         }
+        public List<PlantData> Search(string term)
+        {
+            var sql = @"SELECT *
+                        FROM Plant_Data
+                        WHERE Common_Name like '%' + @searchTerm + '%'
+	                          OR
+	                          Scientific_Name like '%' + @searchTerm + '%'
+                              AND
+                              User_Id = 0";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            return db.Query<PlantData>(sql, new { searchTerm = term }).ToList();
+        }
     }
 }

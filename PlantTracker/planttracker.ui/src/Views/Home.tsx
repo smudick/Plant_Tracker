@@ -33,7 +33,7 @@ class Home extends Component {
         const cards = plants?.map(plantCard);
         return (
             <div>
-                <h1>Home</h1>
+                <h1 className="mt-4">My Plants</h1>
                 <div className="d-flex flex-wrap justify-content-center m-4">
                 {cards}
                 </div>
