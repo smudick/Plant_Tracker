@@ -1,8 +1,17 @@
 import { PlantProps } from "../../Helpers/Interfaces/PlantInterfaces";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
+import PlantData from '../../Helpers/Data/PlantData';
+import {User} from '../../Helpers/Interfaces/UserInterface';
+import {Plant} from '../../Helpers/Interfaces/PlantInterfaces';
 
-const addPlant = ()
+const addPlant = (user: User, plant: Plant): void => {
+    const userPlant = {
+        User_Id : user.id,
+        Plant_Id: plant.id,
+        
+    }
+}
 
 export const PlantCard = ({ plant, user }: PlantProps): JSX.Element => (
   <div>
