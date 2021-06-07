@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -12,16 +12,17 @@ import {
 import {User} from '../../Helpers/Interfaces/UserInterface';
 import Search from './Search';
 
-type NavProps = {
-    user: User | null;
-  };
+// type NavProps = {
+//     user: User | null;
+//   };
 
-const Navigation = ({user} : NavProps): JSX.Element => {
+const Navigation = (user : User): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <div>
+      <div>
+        {console.log(user)}
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Plant Tracker</NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -36,7 +37,7 @@ const Navigation = ({user} : NavProps): JSX.Element => {
             <NavItem>
               <NavLink href="/plantid">Plant Id</NavLink>
             </NavItem>
-            <Search user={user}/>
+            <Search user={user.user}/>
             {user &&
             <NavItem className="ml-4">
               <Button>Log Out</Button>

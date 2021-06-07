@@ -27,7 +27,7 @@ class App extends Component<AppState> {
     return <div className="App">
       <Router>
         <Navigation user={user}/>
-        <Routes/>
+        <Routes user={user}/>
       </Router>
     </div>;
   }

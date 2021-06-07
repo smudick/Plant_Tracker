@@ -21,7 +21,7 @@ class Results extends Component<SearchProps, SearchState> {
   componentDidMount(): void {
     this.setState({
       searchTerm: this.props.match.params.term,
-      user: this.props.location.state?.user
+      user: this.props.user.user
     });
   }
   getProductsFromSearch = (): void => {
@@ -39,9 +39,9 @@ class Results extends Component<SearchProps, SearchState> {
   }
 
   render(): JSX.Element {
-    const { results } = this.state;
+    const { results, user } = this.state;
     const plantCard = (plant: Plant): JSX.Element => {
-      return <PlantCard key={plant.id} plant={plant} />;
+      return <PlantCard key={plant.id} plant={plant} user={user}/>;
     };
     const createCards = (plants: Plant[]) => {
       const cards: Plant[] = [];

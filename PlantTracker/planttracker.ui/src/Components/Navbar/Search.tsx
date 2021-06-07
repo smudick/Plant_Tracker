@@ -22,6 +22,7 @@ class Search extends Component<SearchProps> {
   render(): JSX.Element {
     return (
       <form onSubmit={this.handleSubmit}>
+          {/* {console.log(this.props.user)} */}
         <input
           placeholder="Search for a plant!"
           type="text"

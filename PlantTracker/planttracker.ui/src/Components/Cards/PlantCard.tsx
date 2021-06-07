@@ -9,8 +9,9 @@ const addPlant = (user: User, plant: Plant): void => {
     const userPlant = {
         User_Id : user.id,
         Plant_Id: plant.id,
-        
+        User_Water_Time: plant.watering_Interval,
     }
+    PlantData.addPlantToUser(userPlant)
 }
 
 export const PlantCard = ({ plant, user }: PlantProps): JSX.Element => (
@@ -36,7 +37,7 @@ export const PlantCard = ({ plant, user }: PlantProps): JSX.Element => (
         <CardSubtitle tag="h6" className="mb-2 text-muted">
           {plant.scientific_Name}
         </CardSubtitle>
-        {user === undefined && <button>Add Plant</button>}
+        <button onClick={() => addPlant(user, plant)}>Add Plant</button>
       </CardBody>
     </Card>
   </div>

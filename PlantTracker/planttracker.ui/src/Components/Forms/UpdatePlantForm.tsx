@@ -93,7 +93,6 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
                 onChange={this.handleChange}
                 placeholder="Plant Notes"
                 className={`form-control-lg`}
-                required
               />
             </Col>
           </FormGroup>
