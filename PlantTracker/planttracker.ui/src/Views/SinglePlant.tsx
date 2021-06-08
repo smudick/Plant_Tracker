@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import {
   Plant,
   PlantProps,
@@ -7,15 +7,14 @@ import {
 import { PlantType } from "../Helpers/Interfaces/PlantType";
 import PlantData from "../Helpers/Data/PlantData";
 import { User } from "../Helpers/Interfaces/UserInterface";
-import { Button } from "reactstrap";
 import UpdatePlantModal from "../Components/Modals/UpdatePlantModal";
-import { middleware } from "yargs";
 
 type SinglePlantState = {
   plant?: Plant;
   type: PlantType;
   user: User | null;
   userPlant: UserPlant;
+  added: boolean;
 };
 
 class SinglePlant extends Component<PlantProps> {
@@ -23,7 +22,8 @@ class SinglePlant extends Component<PlantProps> {
     plant: this.props.location.state.plant,
     type: "",
     user: this.props.location.state.user,
-    userPlant: {},
+    userPlant: null,
+    added: false,
   };
 
   componentDidMount = (): void => {
@@ -58,6 +58,19 @@ class SinglePlant extends Component<PlantProps> {
         }
       }
     });
+  };
+
+  addPlant = (user: User, plant: Plant): void => {
+    const userPlant = {
+      User_Id: user.id,
+      Plant_Id: plant.id,
+      User_Water_Time: plant.watering_Interval,
+    };
+    PlantData.addPlantToUser(userPlant);
+    this.setState({
+      added: true,
+    });
+    setTimeout(() => this.setState({ added: false }), 3000);
   };
 
   shadeCalc = (shade: number): string => {
@@ -115,17 +128,25 @@ class SinglePlant extends Component<PlantProps> {
       return bloom;
     }
   };
+  dateCheck = (date: string): string => {
+    if (date === "0001-01-01T00:00:00" || null) {
+      return "No date set or recorded";
+    } else {
+      return date;
+    }
+  };
 
   render(): JSX.Element {
-    const { plant, type, userPlant, user } = this.state;
+    const { plant, type, userPlant, user, added } = this.state;
     return (
-      <div className="d-flex flex-column m-2">
+      <div className="d-flex flex-column align-items-center m-2">
+        {added && <h1>Plant has been added!</h1>}
         <h1>{plant.common_Name}</h1>
         <h4>
           <em>{plant.scientific_Name}</em>
         </h4>
         <h5>{type}</h5>
-        <img src={plant.image_Url}></img>
+        <img className="single-plant-image"src={plant.image_Url}></img>
         <div className="d-flex justify-content-center">
           <div className="m-3">
             <h2>Care Recommendations</h2>
@@ -137,13 +158,18 @@ class SinglePlant extends Component<PlantProps> {
               {this.waterIndicatorCalc(plant.soil_Watering_Indicator)}
             </p>
           </div>
-          {user && (
+          {userPlant && (
             <div className="m-3">
               <h2>Plant Information</h2>
               <p>Bloom color: {this.bloomCalc(plant.bloom)}</p>
               <p>Days between each watering: {userPlant.user_Water_Time}</p>
-              <p>Last watered date: {userPlant.last_Watered_Date}</p>
-              <p>Next scheduled watering date: {userPlant.next_Watered_Date}</p>
+              <p>
+                Last watered date: {this.dateCheck(userPlant.last_Watered_Date)}
+              </p>
+              <p>
+                Next scheduled watering date:{" "}
+                {this.dateCheck(userPlant.next_Watered_Date)}
+              </p>
               <p>Notes: {userPlant.notes}</p>
               <UpdatePlantModal
                 user={user}
@@ -156,6 +182,9 @@ class SinglePlant extends Component<PlantProps> {
             </div>
           )}
         </div>
+        {userPlant === null && (
+          <button onClick={() => this.addPlant(user, plant)}>Add Plant</button>
+        )}
       </div>
     );
   }

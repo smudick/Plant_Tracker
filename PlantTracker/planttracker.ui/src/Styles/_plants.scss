@@ -9,3 +9,9 @@
       padding: 2em;
       width: 400px;
   }
+
+  .single-plant-image {
+    max-width: 60%;
+    max-height: 350px;
+    object-fit: cover;
+  }
