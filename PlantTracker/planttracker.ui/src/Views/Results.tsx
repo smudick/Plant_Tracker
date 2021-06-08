@@ -1,23 +1,27 @@
 import React, { Component } from "react";
 import PlantData from "../Helpers/Data/PlantData";
-import { PlantCard } from "../Components/Cards/PlantCard";
+import PlantCard from "../Components/Cards/PlantCard";
 import { Plant } from "../Helpers/Interfaces/PlantInterfaces";
 import { SearchProps } from "../Helpers/Interfaces/SearchInterfaces";
+import { User } from "../Helpers/Interfaces/UserInterface";
 
 type SearchState = {
   results?: Plant[];
   searchTerm: string;
+  user: User;
 };
 
-class Results extends Component<SearchProps, SearchState> {
+export default class Results extends Component<SearchProps, SearchState> {
   state: SearchState = {
     results: [],
     searchTerm: "",
+    user: this.props.user.user,
   };
 
   componentDidMount(): void {
     this.setState({
       searchTerm: this.props.match.params.term,
+      
     });
   }
   getProductsFromSearch = (): void => {
@@ -35,9 +39,11 @@ class Results extends Component<SearchProps, SearchState> {
   }
 
   render(): JSX.Element {
-    const { results } = this.state;
+    const { results, user } = this.state;
     const plantCard = (plant: Plant): JSX.Element => {
-      return <PlantCard key={plant.id} plant={plant} />;
+      return (
+        <PlantCard key={plant.id} plant={plant} user={user} homePage={false} />
+      );
     };
     const createCards = (plants: Plant[]) => {
       const cards: Plant[] = [];
@@ -57,7 +63,11 @@ class Results extends Component<SearchProps, SearchState> {
       ];
     }
 
-    return <div className="d-flex justify-content-center">{cards}</div>;
+    return (
+      <div>
+        <h1 className="mt-4">Results</h1>
+        <div className="d-flex flex-wrap justify-content-center">{cards}</div>
+      </div>
+    );
   }
 }
-export default Results;

@@ -42,23 +42,15 @@ namespace PlantTracker.Data
         public void AddPlantToUser(UserPlants userPlants)
         {
             using var db = new SqlConnection(ConnectionString);
-            var Last_Watered_Date = DateTime.Now;
-            userPlants.Last_Watered_Date = Last_Watered_Date;
-            var Next_Watered_Date = Last_Watered_Date.AddDays(userPlants.User_Water_Time);
-            userPlants.Next_Watered_Date = Next_Watered_Date;
             var sql = @"INSERT INTO [dbo].[User_Plants]
                             ([User_Id]
                             ,[Plant_Id]
-                            ,[Last_Watered_Date]
-                            ,[Next_Watered_Date]
                             ,[Notes]
                             ,[User_Water_Time]
                             ,[User_Sunlight])
                        VALUES                 
                             (@User_Id
                             ,@Plant_Id
-                            ,@Last_Watered_Date
-                            ,@Next_Watered_Date
                             ,@Notes
                             ,@User_Water_Time
                             ,@User_Sunlight)";

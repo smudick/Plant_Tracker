@@ -4,6 +4,7 @@ declare module "SearchTypes" {
   interface SearchProps {
     history: RouteComponentProps["history"];
     match: RouteComponentProps["match"];
+    user: User;
   }
 }
 

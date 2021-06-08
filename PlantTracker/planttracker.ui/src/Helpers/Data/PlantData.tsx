@@ -41,6 +41,12 @@ const search = (searchTerm: string) : Promise<Plant> => new Promise((resolve, re
         resolve(response.data);
     }).catch((error) => reject(error))
 })
+
+const addPlantToUser = (userPlant: UserPlant) : Promise<UserPlant> => new Promise((resolve, reject) => {
+    axios.post(`${userPlantUrl}`, userPlant).then((response) => {
+        resolve(response.data);
+    }).catch((error) => reject(error))
+})
  
 const PlantData = {
     getAllPlants,
@@ -48,6 +54,7 @@ const PlantData = {
     getPlantsForSingleUser,
     getUserPlants,
     updateUserPlant,
-    search
+    search,
+    addPlantToUser,
 }
 export default PlantData;

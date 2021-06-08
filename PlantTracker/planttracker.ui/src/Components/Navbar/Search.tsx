@@ -5,6 +5,7 @@ import { SearchProps } from "../../Helpers/Interfaces/SearchInterfaces";
 class Search extends Component<SearchProps> {
   state = {
     query: "",
+    user: this.props.user,
   };
   handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({
@@ -13,11 +14,15 @@ class Search extends Component<SearchProps> {
   };
   handleSubmit = (): void => {
     this.props.history.action;
-    this.props.history.push(`/search/${this.state.query}`);
+    this.props.history.push({
+      pathname: `/search/${this.state.query}`,
+      state: { user: this.props.user },
+    });
   };
   render(): JSX.Element {
     return (
       <form onSubmit={this.handleSubmit}>
+          {/* {console.log(this.props.user)} */}
         <input
           placeholder="Search for a plant!"
           type="text"
