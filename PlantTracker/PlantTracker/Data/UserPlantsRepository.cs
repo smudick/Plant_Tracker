@@ -36,7 +36,8 @@ namespace PlantTracker.Data
             using var db = new SqlConnection(ConnectionString);
             var sql = @"SELECT * 
                         FROM User_Plants
-                        WHERE User_Plants.User_Id = @userId";
+                        WHERE User_Plants.User_Id = @userId
+                        ORDER BY User_Plants.Next_Watered_Date asc";
             return db.Query<UserPlants>(sql, new { userId = userId }).ToList();
         }
         public void AddPlantToUser(UserPlants userPlants)
@@ -46,14 +47,12 @@ namespace PlantTracker.Data
                             ([User_Id]
                             ,[Plant_Id]
                             ,[Notes]
-                            ,[User_Water_Time]
-                            ,[User_Sunlight])
+                            ,[User_Water_Time])
                        VALUES                 
                             (@User_Id
                             ,@Plant_Id
                             ,@Notes
-                            ,@User_Water_Time
-                            ,@User_Sunlight)";
+                            ,@User_Water_Time)";
             var id = db.ExecuteScalar<int>(sql, userPlants);
             userPlants.Id = id;
         }
@@ -78,13 +77,11 @@ namespace PlantTracker.Data
             var id = userPlant.Id;
             var Notes = userPlant.Notes;
             var User_Water_Time = userPlant.User_Water_Time;
-            var User_Sunlight = userPlant.User_Sunlight;
             var Next_Watered_Date = userPlant.Next_Watered_Date;
             var sql = @"UPDATE [dbo].[User_Plants]
                             SET
                                 [Notes] = @Notes,
 		                        [User_Water_Time] = @User_Water_Time,
-		                        [User_Sunlight] = @User_Sunlight,
                                 [Next_Watered_Date] = @Next_Watered_Date
                             WHERE [User_Plants].id = @id";
             db.Execute(sql, userPlant);

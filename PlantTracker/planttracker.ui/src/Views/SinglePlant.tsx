@@ -129,15 +129,23 @@ class SinglePlant extends Component<PlantProps> {
     }
   };
   dateCheck = (date: string): string => {
-    if (date === "0001-01-01T00:00:00" || null) {
+    if (date === "0001-01-01T00:00:00") {
       return "No date set or recorded";
     } else {
-      return date;
+        const formattedDate = new Date(date).toLocaleDateString(
+            'en-us', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }
+        )
+      return formattedDate;
     }
   };
 
   render(): JSX.Element {
     const { plant, type, userPlant, user, added } = this.state;
+    
     return (
       <div className="d-flex flex-column align-items-center m-2">
         {added && <h1>Plant has been added!</h1>}

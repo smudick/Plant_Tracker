@@ -12,17 +12,12 @@ import {
 import {User} from '../../Helpers/Interfaces/UserInterface';
 import Search from './Search';
 
-// type NavProps = {
-//     user: User | null;
-//   };
-
 const Navigation = (user : User): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
   return (
       <div>
-        {console.log(user)}
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Plant Tracker</NavbarBrand>
         <NavbarToggler onClick={toggle} />
