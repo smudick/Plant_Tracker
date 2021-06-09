@@ -30,6 +30,9 @@ const Navigation = (user : User): JSX.Element => {
               <NavLink href="/discovery">Discovery</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink href="/browse">Browse</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink href="/plantid">Plant Id</NavLink>
             </NavItem>
             <Search user={user.user}/>
