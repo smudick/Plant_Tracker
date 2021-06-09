@@ -4,14 +4,16 @@ import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
 import PlantData from "../../Helpers/Data/PlantData";
 import { User } from "../../Helpers/Interfaces/UserInterface";
-import { Plant } from "../../Helpers/Interfaces/PlantInterfaces";
+import { Plant, UserPlant } from "../../Helpers/Interfaces/PlantInterfaces";
 
 export default class PlantCard extends Component<PlantProps> {
   state = {
     plant: this.props.plant,
     user: this.props.user,
     added: false,
-    homePage: this.props.homePage
+    homePage: this.props.homePage,
+    water: this.props.water,
+    onUpdate: this.props.onUpdate
   };
 
   addPlant = (user: User, plant: Plant): void => {
@@ -26,8 +28,17 @@ export default class PlantCard extends Component<PlantProps> {
     })
     setTimeout(() => this.setState({ added: false }), 3000);
   };
+
+  waterPlant = (userPlant : UserPlant): void => {
+    PlantData.waterPlant(userPlant).then(() => {
+      if (this.state.onUpdate) {
+        this.state.onUpdate();
+      }
+    })
+  }
+  
   render(): JSX.Element {
-    const { plant, user, added, homePage } = this.state;
+    const { plant, user, added, homePage, water} = this.state;
     return (
       <div>
           {added && 
@@ -58,6 +69,11 @@ export default class PlantCard extends Component<PlantProps> {
             <button onClick={() => this.addPlant(user, plant)}>
               Add Plant
             </button>
+            }
+            {water && 
+              <button onClick={() => this.waterPlant(this.props.userPlant)}>
+                Water Plant
+              </button>
             }
           </CardBody>
         </Card>

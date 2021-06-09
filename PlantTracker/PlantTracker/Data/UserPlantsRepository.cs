@@ -40,6 +40,14 @@ namespace PlantTracker.Data
                         ORDER BY User_Plants.Next_Watered_Date asc";
             return db.Query<UserPlants>(sql, new { userId = userId }).ToList();
         }
+        public List<UserPlants> GetUserPlantByNextWaterDate(DateTime next_Watered_Date)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"SELECT * 
+                        FROM User_Plants
+                        WHERE User_Plants.Next_Watered_Date = @next_Watered_Date";
+            return db.Query<UserPlants>(sql, new { next_Watered_Date = next_Watered_Date }).ToList();
+        }
         public void AddPlantToUser(UserPlants userPlants)
         {
             using var db = new SqlConnection(ConnectionString);

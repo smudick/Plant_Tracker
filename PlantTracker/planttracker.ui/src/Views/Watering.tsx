@@ -23,9 +23,16 @@ class Watering extends Component<PlantProps> {
       });
     });
   }
+  onUpdate(): void {
+      PlantData.getUserPlants(1).then((userPlantResponse: UserPlant[]) => {
+        this.setState({
+          userPlants: userPlantResponse,
+        });
+      });
+  }
   formatDate = (date: string): string => {
     if (date === "0001-01-01T00:00:00") {
-      return "No date set or recorded";
+      return "No watering date scheduled";
     } else {
       const formattedDate = new Date(date).toLocaleDateString("en-us", {
         year: "numeric",
@@ -53,6 +60,9 @@ class Watering extends Component<PlantProps> {
               plant={plantToWater}
               user={user}
               homePage={true}
+              water={true}
+              userPlant={userPlant}
+              onUpdate={this.onUpdate}
             />
           </div>
         </div>

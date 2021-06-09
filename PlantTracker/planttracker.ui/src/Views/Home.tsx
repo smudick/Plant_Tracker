@@ -28,7 +28,7 @@ class Home extends Component {
     render(): JSX.Element {
         const {plants, user} = this.state;
         const plantCard = (plant: Plant): JSX.Element => {
-            return <PlantCard key={plant.id} plant={plant} user={user} homePage={true}/>
+            return <PlantCard key={plant.id} plant={plant} user={user} homePage={true} water={false}/>
         };
         const cards = plants?.map(plantCard);
         return (
