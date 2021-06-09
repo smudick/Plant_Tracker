@@ -6,6 +6,7 @@ import PlantId from '../Views/PlantId'
 import Results from '../Views/Results'
 import SinglePlant from '../Views/SinglePlant'
 import Watering from '../Views/Watering'
+import Browse from '../Views/Browse'
 import NotFound from '../Views/NotFound';
 import {PlantProps} from '../Helpers/Interfaces/PlantInterfaces';
 import {SearchProps} from '../Helpers/Interfaces/SearchInterfaces';
@@ -20,6 +21,7 @@ export default function Routes(user: User): JSX.Element {
             <Route exact path='/PlantId' component={() => <PlantId/>} />
             <Route exact path='/search/:term' component={(props: SearchProps) => <Results{...props} user={user}/>} />
             <Route exact path='/details' component={(props: PlantProps) => <SinglePlant{...props} user={user}/>} />
+            <Route exact path='/browse' component={(props: PlantProps) => <Browse{...props} user={user}/>} />
             <Route exact path='/Watering' component={(props: PlantProps) => <Watering{...props} user={user}/>} />
             <Route exact path='/' component={() => <Home/>} />
             <Route component={NotFound} />
