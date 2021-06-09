@@ -12,8 +12,7 @@ export default class PlantCard extends Component<PlantProps> {
     user: this.props.user,
     added: false,
     homePage: this.props.homePage,
-    water: this.props.water,
-    onUpdate: this.props.onUpdate
+    water: this.props.water
   };
 
   addPlant = (user: User, plant: Plant): void => {
@@ -28,14 +27,6 @@ export default class PlantCard extends Component<PlantProps> {
     })
     setTimeout(() => this.setState({ added: false }), 3000);
   };
-
-  waterPlant = (userPlant : UserPlant): void => {
-    PlantData.waterPlant(userPlant).then(() => {
-      if (this.state.onUpdate) {
-        this.state.onUpdate();
-      }
-    })
-  }
   
   render(): JSX.Element {
     const { plant, user, added, homePage, water} = this.state;
@@ -71,7 +62,7 @@ export default class PlantCard extends Component<PlantProps> {
             </button>
             }
             {water && 
-              <button onClick={() => this.waterPlant(this.props.userPlant)}>
+              <button onClick={() => this.props.waterPlant(this.props.userPlant)}>
                 Water Plant
               </button>
             }

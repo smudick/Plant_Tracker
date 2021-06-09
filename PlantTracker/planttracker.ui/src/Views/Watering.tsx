@@ -23,13 +23,23 @@ class Watering extends Component<PlantProps> {
       });
     });
   }
+
   onUpdate(): void {
-      PlantData.getUserPlants(1).then((userPlantResponse: UserPlant[]) => {
+    PlantData.getPlantsForSingleUser(1).then((response: Plant[]) => {
+      PlantData.getUserPlants(1).then((userPlantResponse) => {
         this.setState({
+          plants: response,
           userPlants: userPlantResponse,
         });
       });
+    });
   }
+  waterPlant = (userPlant: UserPlant): void => {
+    PlantData.waterPlant(userPlant).then(() => {
+        this.onUpdate();
+      });
+  };
+
   formatDate = (date: string): string => {
     if (date === "0001-01-01T00:00:00") {
       return "No watering date scheduled";
@@ -46,11 +56,11 @@ class Watering extends Component<PlantProps> {
     const { user, plants, userPlants } = this.state;
     let plantToWater: Plant;
     const getDates = (userPlant: UserPlant): JSX.Element => {
-        plants.forEach((plant: Plant) => {
-          if (userPlant.plant_Id === plant.id) {
-            plantToWater = plant;
-          }
-        });
+      plants.forEach((plant: Plant) => {
+        if (userPlant.plant_Id === plant.id) {
+          plantToWater = plant;
+        }
+      });
       return (
         <div>
           <h2>{this.formatDate(userPlant.next_Watered_Date)}</h2>
@@ -62,7 +72,7 @@ class Watering extends Component<PlantProps> {
               homePage={true}
               water={true}
               userPlant={userPlant}
-              onUpdate={this.onUpdate}
+              waterPlant={this.waterPlant}
             />
           </div>
         </div>
@@ -71,6 +81,7 @@ class Watering extends Component<PlantProps> {
     const dates = userPlants.map(getDates);
     return (
       <div>
+        {console.log(user)}
         <h1>Watering</h1>
         <div>{dates}</div>
       </div>
