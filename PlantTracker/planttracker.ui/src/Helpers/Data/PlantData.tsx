@@ -47,7 +47,12 @@ const addPlantToUser = (userPlant: UserPlant) : Promise<UserPlant> => new Promis
         resolve(response.data);
     }).catch((error) => reject(error))
 })
- 
+const waterPlant = (userPlant: UserPlant) : Promise<UserPlant> => new Promise((resolve, reject) => {
+    axios.put(`${userPlantUrl}/water`, userPlant).then((response) => {
+        resolve(response.data);
+    }).catch((error) => reject(error))
+})
+  
 const PlantData = {
     getAllPlants,
     getPlantType,
@@ -56,5 +61,6 @@ const PlantData = {
     updateUserPlant,
     search,
     addPlantToUser,
+    waterPlant
 }
 export default PlantData;

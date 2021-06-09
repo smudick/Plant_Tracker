@@ -35,6 +35,11 @@ namespace PlantTracker.Controllers
         {
             return Ok(_repo.GetUserPlantsByUserId(id));
         }
+        [HttpGet("date/{next_Watered_Date}")]
+        public IActionResult GetUserPlantByDate(DateTime next_Watered_Date)
+        {
+            return Ok(_repo.GetUserPlantByNextWaterDate(next_Watered_Date));
+        }
         [HttpPost]
         public IActionResult AddPlant(UserPlants userPlants)
         {
