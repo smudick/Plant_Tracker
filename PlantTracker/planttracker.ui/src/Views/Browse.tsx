@@ -9,12 +9,14 @@ import { CustomInput, Label, Form, FormGroup } from "reactstrap";
 
 type BrowseState = {
   plants?: Plant[];
+  selectedPlants?: Plant[];
   user?: User;
   types: PlantType[];
 };
 class Browse extends Component {
   state: BrowseState = {
     plants: [],
+    selectedPlants: [],
     user: null,
     types: [],
   };
@@ -25,6 +27,7 @@ class Browse extends Component {
         PlantData.getAllTypes().then((typeResponse: PlantType[]) => {
           this.setState({
             plants: plantResponse,
+            selectedPlants: plantResponse,
             user: response,
             types: typeResponse,
           });
@@ -32,11 +35,40 @@ class Browse extends Component {
       });
     });
   }
-  filter = () => {
-      console.log('filter');
+  statePlants: Plant[] = [];
+    handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+      if (e.target.checked === true && this.state.plants) {
+         const filteredPlants = this.state.plants?.filter(plant => plant.type === parseInt(e.target.value));
+         this.statePlants?.push(...filteredPlants);
+         this.setState({
+             selectedPlants: this.statePlants
+         })
+      } else if (e.target.checked === false && this.state.plants) {
+        const unfilteredPlants = this.state.plants?.filter(plant => plant.type === parseInt(e.target.value));
+        let counter = 0;
+        let index = 0;
+        this.statePlants?.forEach((statePlant) => {
+            unfilteredPlants.forEach((unfilteredPlant) => {
+                if (statePlant === unfilteredPlant) {
+                    counter++;
+                    index = this.statePlants.indexOf(statePlant) - counter + 1;
+
+                }
+            })
+        })
+            this.statePlants.splice(index, counter);
+            this.setState({
+                selectedPlants: this.statePlants
+            })
+        }
+        if (this.statePlants.length === 0) {
+            this.setState({
+                selectedPlants: this.state.plants
+            })
+      }
   }
   render(): JSX.Element {
-    const { plants, user } = this.state;
+    const { plants, user, types, selectedPlants } = this.state;
     const plantCard = (plant: Plant): JSX.Element => {
       return (
         <PlantCard
@@ -48,39 +80,25 @@ class Browse extends Component {
         />
       );
     };
-    const cards = plants?.map(plantCard);
+    const cards = selectedPlants?.map(plantCard);
+    const filterButton = (plantType: PlantType): JSX.Element => {
+      return (
+        <CustomInput type="checkbox" id={plantType.id} label={plantType.type} value={plantType.id} selected={false} onChange={this.handleChange}/>
+      );
+    };
+    const filterButtons = types?.map(filterButton);
     return (
       <div className="d-flex align-items-center flex-column">
         <h1 className="mt-4">Browse</h1>
-        <Form onSubmit={() => this.filter()}>
+        <Form>
           <FormGroup>
-            <Label for="exampleCheckbox">Filter</Label>
-                {this.state.types.length && 
-            <div className="d-flex flex-column align-items-start">
-              <CustomInput
-                type="checkbox"
-                id={this.state.types[0].id}
-                label={this.state.types[0].type}
-                />
-              <CustomInput
-                type="checkbox"
-                id="exampleCustomCheckbox2"
-                label="Or this one"
-                />
-              <CustomInput
-                type="checkbox"
-                id="exampleCustomCheckbox3"
-                label="But not this disabled one"
-                />
-              <CustomInput
-                type="checkbox"
-                id="exampleCustomCheckbox4"
-                label="Can't click this label to check!"
-                />
-            </div>
-            }
+            <Label for="exampleCheckbox">Filter by plant type</Label>
+            {this.state.types.length && (
+              <div className="d-flex flex-column align-items-start">
+                {filterButtons}
+              </div>
+            )}
           </FormGroup>
-          <button>Filter</button>
         </Form>
         <div className="d-flex flex-wrap justify-content-center">{cards}</div>
       </div>
