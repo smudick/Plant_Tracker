@@ -19,6 +19,12 @@ const getPlantType = (id: number): Promise<PlantType> => new Promise((resolve, r
     }).catch((error) => reject(error))
 })
 
+const getAllTypes = (): Promise<PlantType> => new Promise((resolve, reject) => {
+    axios.get(`${plantTypeUrl}`).then((response) => {
+        resolve(response.data);
+    }).catch((error) => reject(error))
+})
+
 const getPlantsForSingleUser = (userId: number): Promise<Plant> => new Promise((resolve, reject) => {
     axios.get(`${plantUrl}/user/${userId}`).then((response) => {
         resolve(response.data);
@@ -61,6 +67,7 @@ const PlantData = {
     updateUserPlant,
     search,
     addPlantToUser,
-    waterPlant
+    waterPlant,
+    getAllTypes
 }
 export default PlantData;
