@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlantTracker.Data;
+using PlantTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,12 @@ namespace PlantTracker.Controllers
         {
             var results = _repo.Search(term);
             return Ok(results);
+        }
+        [HttpPost]
+        public IActionResult AddCustomPlant(PlantData plant)
+        {
+            _repo.AddCustomPlant(plant);
+            return Created($"api/PlantData/{plant.Id}", plant);
         }
     } 
 }

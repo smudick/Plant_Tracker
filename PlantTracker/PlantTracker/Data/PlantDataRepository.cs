@@ -59,5 +59,49 @@ namespace PlantTracker.Data
 
             return db.Query<PlantData>(sql, new { searchTerm = term }).ToList();
         }
+        public void AddCustomPlant(PlantData plant)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = @"INSERT INTO [dbo].[Plant_Data]
+                            ([Scientific_Name]
+                            ,[Common_Name]
+                            ,[Shade]
+                            ,[Moisture_Use]
+                            ,[Soil_Watering_Indicator]
+                            ,[Max_Width]
+                            ,[Toxic_Dogs]
+                            ,[Toxic_Cats]
+                            ,[Type]
+                            ,[Flowering]
+                            ,[Hanging]
+                            ,[Air_Purifying]
+                            ,[Max_Height]
+                            ,[Ph_Soil]
+                            ,[Bloom]
+                            ,[Watering_Interval]
+                            ,[User_Id]
+                            ,[Image_Url])
+                        VALUES                 
+                            (@Scientific_Name
+                            ,@Common_Name
+                            ,@Shade
+                            ,@Moisture_Use
+                            ,@Soil_Watering_Indicator
+                            ,@Max_Width
+                            ,@Toxic_Dogs
+                            ,@Toxic_Cats
+                            ,@Type
+                            ,@Flowering
+                            ,@Hanging
+                            ,@Air_Purifying
+                            ,@Max_Height
+                            ,@Ph_Soil
+                            ,@Bloom
+                            ,@Watering_Interval
+                            ,@User_Id
+                            ,@Image_Url)";
+            var id = db.ExecuteScalar<int>(sql, plant);
+            plant.Id = id;
+        }
     }
 }
