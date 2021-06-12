@@ -36,8 +36,8 @@ class Watering extends Component<PlantProps> {
   }
   waterPlant = (userPlant: UserPlant): void => {
     PlantData.waterPlant(userPlant).then(() => {
-        this.onUpdate();
-      });
+      this.onUpdate();
+    });
   };
 
   formatDate = (date: string): string => {
@@ -54,34 +54,49 @@ class Watering extends Component<PlantProps> {
   };
   render(): JSX.Element {
     const { user, plants, userPlants } = this.state;
-    let plantToWater: Plant;
-    const getDates = (userPlant: UserPlant): JSX.Element => {
-      plants.forEach((plant: Plant) => {
-        if (userPlant.plant_Id === plant.id) {
-          plantToWater = plant;
-        }
+    const realData: any = {};
+    userPlants.forEach((userPlant: UserPlant) => {
+      const betterDate = this.formatDate(userPlant.next_Watered_Date);
+      if (!realData[betterDate]) {
+        realData[betterDate] = [];
+      }
+
+      const plant = plants.find(
+        (plant: Plant) => userPlant.plant_Id === plant.id
+      );
+      const plantData = { userPlant, plant };
+
+      realData[betterDate].push(plantData);
+    });
+
+    const createDateBlock = (date: string, plants: any) => {
+      const plantCards = plants.map((plant: any) => {
+        return (
+          <PlantCard
+            key={plant.plant.id}
+            plant={plant.plant}
+            user={user}
+            homePage={true}
+            water={true}
+            userPlant={plant.userPlant}
+            waterPlant={this.waterPlant}
+          />
+        );
       });
       return (
         <div>
-          <h2>{this.formatDate(userPlant.next_Watered_Date)}</h2>
+          <h2>{date}</h2>
           <div className="d-flex justify-content-center flex-wrap">
-            <PlantCard
-              key={plantToWater.id}
-              plant={plantToWater}
-              user={user}
-              homePage={true}
-              water={true}
-              userPlant={userPlant}
-              waterPlant={this.waterPlant}
-            />
+            {plantCards}
           </div>
         </div>
       );
     };
-    const dates = userPlants.map(getDates);
+    const dates = Object.entries(realData).map(([date, plants]) =>
+      createDateBlock(date, plants)
+    );
     return (
       <div>
-        {console.log(user)}
         <h1>Watering</h1>
         <div>{dates}</div>
       </div>
