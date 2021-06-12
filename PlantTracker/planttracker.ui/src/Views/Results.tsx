@@ -4,6 +4,7 @@ import PlantCard from "../Components/Cards/PlantCard";
 import { Plant } from "../Helpers/Interfaces/PlantInterfaces";
 import { SearchProps } from "../Helpers/Interfaces/SearchInterfaces";
 import { User } from "../Helpers/Interfaces/UserInterface";
+import CreatePlantModal from '../Components/Modals/CreatePlantModal';
 
 type SearchState = {
   results?: Plant[];
@@ -57,8 +58,11 @@ export default class Results extends Component<SearchProps, SearchState> {
       cards = createCards(results);
     } else {
       cards = [
-        <div className="d-flex justify-content-center">
-          <h1 className="mt-4 mb-4">No matching plants</h1>
+        <div className="d-flex align-items-center flex-column">
+          <h1 className="mt-4 mb-4">No Plants Found</h1>
+          <h5 className="mt-4 mb-2">We don't have any plants in our database with a common or scientific name matching your search critera.</h5>
+          <h5 className="mt-2 mb-4">Don't think we have what you're looking for? Add your own custom plant below!</h5>
+          <CreatePlantModal user={user}/>
         </div>,
       ];
     }

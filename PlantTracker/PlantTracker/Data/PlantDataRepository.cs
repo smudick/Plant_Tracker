@@ -20,7 +20,8 @@ namespace PlantTracker.Data
         {
             using var db = new SqlConnection(ConnectionString);
             var sql = @"SELECT * 
-                        FROM Plant_Data";
+                        FROM Plant_Data
+                        WHERE User_Id = 0";
             return db.Query<PlantData>(sql).ToList();
         }
 
@@ -49,9 +50,9 @@ namespace PlantTracker.Data
         {
             var sql = @"SELECT *
                         FROM Plant_Data
-                        WHERE Common_Name like '%' + @searchTerm + '%'
+                        WHERE (Common_Name like '%' + @searchTerm + '%'
 	                          OR
-	                          Scientific_Name like '%' + @searchTerm + '%'
+	                          Scientific_Name like '%' + @searchTerm + '%')
                               AND
                               User_Id = 0";
 
