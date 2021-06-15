@@ -102,6 +102,11 @@ const waterPlant = (userPlant: UserPlant): Promise<UserPlant> =>
       })
       .catch((error) => reject(error));
   });
+  const getMostRecentUserPlant = (customerId: number) : Promise<Plant> => new  Promise((resolve, reject) => {
+    axios.get(`${plantUrl}/user/last/${customerId}`).then((response) => {
+        resolve(response.data);
+    }).catch((error) => reject(error));
+})
 const PlantData = {
   getAllPlants,
   getPlantType,
@@ -112,6 +117,7 @@ const PlantData = {
   addPlantToUser,
   waterPlant,
   getAllTypes,
-  addCustomPlant
+  addCustomPlant,
+  getMostRecentUserPlant
 };
 export default PlantData;

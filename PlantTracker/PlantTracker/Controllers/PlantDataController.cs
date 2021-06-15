@@ -50,5 +50,10 @@ namespace PlantTracker.Controllers
             _repo.AddCustomPlant(plant);
             return Created($"api/PlantData/{plant.Id}", plant);
         }
+        [HttpGet("user/last/{userId}")]
+        public IActionResult GetMostRecentCustomPlant(int userId)
+        {
+            return Ok(_repo.GetMostRecentCustomPlant(userId));
+        }
     } 
 }

@@ -99,8 +99,6 @@ class SinglePlant extends Component<PlantProps> {
         return "Water when the soil is somewhat dry";
       case 4:
         return "Soil should never be dry";
-      case 5:
-        return "High";
       default:
         return "unknown";
     }

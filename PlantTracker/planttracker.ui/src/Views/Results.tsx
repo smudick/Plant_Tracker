@@ -69,7 +69,6 @@ export default class Results extends Component<SearchProps, SearchState> {
 
     return (
       <div>
-        <h1 className="mt-4">Results</h1>
         <div className="d-flex flex-wrap justify-content-center">{cards}</div>
       </div>
     );

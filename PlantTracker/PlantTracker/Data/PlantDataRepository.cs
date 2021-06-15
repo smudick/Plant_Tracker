@@ -104,5 +104,13 @@ namespace PlantTracker.Data
             var id = db.ExecuteScalar<int>(sql, plant);
             plant.Id = id;
         }
+        public PlantData GetMostRecentCustomPlant(int userId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+            var sql = $@"SELECT TOP 1 * FROM Plant_Data pd
+                          WHERE pd.User_Id = @userId
+                            ORDER BY pd.id DESC";
+            return db.QueryFirstOrDefault<PlantData>(sql, new { userId = userId });
+        }
     }
 }
