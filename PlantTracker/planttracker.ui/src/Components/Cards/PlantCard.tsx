@@ -4,7 +4,7 @@ import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
 import PlantData from "../../Helpers/Data/PlantData";
 import { User } from "../../Helpers/Interfaces/UserInterface";
-import { Plant, UserPlant } from "../../Helpers/Interfaces/PlantInterfaces";
+import { Plant} from "../../Helpers/Interfaces/PlantInterfaces";
 
 export default class PlantCard extends Component<PlantProps> {
   state = {

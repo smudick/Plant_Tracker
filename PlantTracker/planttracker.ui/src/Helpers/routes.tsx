@@ -10,18 +10,18 @@ import NotFound from '../Views/NotFound';
 import {PlantProps} from '../Helpers/Interfaces/PlantInterfaces';
 import {SearchProps} from '../Helpers/Interfaces/SearchInterfaces';
 import {User} from '../Helpers/Interfaces/UserInterface';
+import {DiscoveryProps} from '../Helpers/Interfaces/DiscoveryInterfaces';
 
 
 export default function Routes(user: User): JSX.Element {
     return (
         <Switch>
             <Route exact path='/' component={() => <Home/>} />
-            <Route exact path='/Discovery' component={() => <Discovery/>} />
+            <Route exact path='/Discovery' component={(props: DiscoveryProps) => <Discovery{...props} user={user}/>} />
             <Route exact path='/search/:term' component={(props: SearchProps) => <Results{...props} user={user}/>} />
             <Route exact path='/details' component={(props: PlantProps) => <SinglePlant{...props} user={user}/>} />
             <Route exact path='/browse' component={(props: PlantProps) => <Browse{...props} user={user}/>} />
             <Route exact path='/Watering' component={(props: PlantProps) => <Watering{...props} user={user}/>} />
-            <Route exact path='/' component={() => <Home/>} />
             <Route component={NotFound} />
         </Switch>
     )
