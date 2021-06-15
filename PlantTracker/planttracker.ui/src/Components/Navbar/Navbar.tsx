@@ -32,9 +32,6 @@ const Navigation = (user : User): JSX.Element => {
             <NavItem>
               <NavLink href="/browse" user={user}>Browse</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="/plantid">Plant Id</NavLink>
-            </NavItem>
             <Search user={user.user}/>
             {user &&
             <NavItem className="ml-4">
