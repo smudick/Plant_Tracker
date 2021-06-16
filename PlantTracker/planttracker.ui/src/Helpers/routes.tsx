@@ -9,14 +9,14 @@ import Browse from '../Views/Browse'
 import NotFound from '../Views/NotFound';
 import {PlantProps} from '../Helpers/Interfaces/PlantInterfaces';
 import {SearchProps} from '../Helpers/Interfaces/SearchInterfaces';
-import {User} from '../Helpers/Interfaces/UserInterface';
+import {User, UserProps} from '../Helpers/Interfaces/UserInterface';
 import {DiscoveryProps} from '../Helpers/Interfaces/DiscoveryInterfaces';
 
 
 export default function Routes(user: User): JSX.Element {
     return (
         <Switch>
-            <Route exact path='/' component={() => <Home/>} />
+            <Route exact path='/' component={(props: UserProps) => <Home{...props} user={user}/>} />
             <Route exact path='/Discovery' component={(props: DiscoveryProps) => <Discovery{...props} user={user}/>} />
             <Route exact path='/search/:term' component={(props: SearchProps) => <Results{...props} user={user}/>} />
             <Route exact path='/details' component={(props: PlantProps) => <SinglePlant{...props} user={user}/>} />

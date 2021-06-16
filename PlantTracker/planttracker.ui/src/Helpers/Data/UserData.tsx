@@ -16,9 +16,16 @@ const getUserByFirebaseUid = (firebase_Uid: string): Promise<User> => new Promis
     }).catch((error) => reject(error));
 });
 
+const addNewUser = (user: User): Promise<User> => new Promise((resolve, reject) => {
+    axios.post(`${usersUrl}`, user).then((response) => {
+        resolve(response.data);
+    }).catch((error) => reject(error));
+})
+
 const UserData = {
     getUserById,
-    getUserByFirebaseUid
+    getUserByFirebaseUid,
+    addNewUser
 }
 
 export default UserData;

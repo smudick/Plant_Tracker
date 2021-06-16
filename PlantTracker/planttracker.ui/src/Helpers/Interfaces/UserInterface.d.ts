@@ -11,4 +11,4 @@ declare module 'UserTypes' {
         user: User,
     }
 }
-export {User}
+export {User, UserProps}

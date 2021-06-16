@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import {User} from '../../Helpers/Interfaces/UserInterface';
 import Search from './Search';
+import Auth from '../Auth';
 
 const Navigation = (user : User): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,18 +34,9 @@ const Navigation = (user : User): JSX.Element => {
               <NavLink href="/browse" user={user}>Browse</NavLink>
             </NavItem>
             <Search user={user.user}/>
-            {user &&
-            <NavItem className="ml-4">
-              <Button>Log Out</Button>
-            </NavItem>
-            }
-            {!user &&
-            <NavItem className="ml-4">
-              <Button>Log In</Button>
-            </NavItem>
-            }
           </Nav>
         </Collapse>
+        <Auth user={user.user} />
       </Navbar>
     </div>
   );

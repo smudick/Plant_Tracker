@@ -45,14 +45,12 @@ namespace PlantTracker.Data
             var User_Created_Date = DateTime.Now;
             user.User_Created_Date = User_Created_Date;
             var sql = @"INSERT INTO [dbo].[User]
-                            ([First_Name]
-                            ,[Last_Name]
+                            ([Display_Name]
                             ,[Profile_Picture]
                             ,[User_Created_Date]
                             ,[Firebase_Uid])
                         VALUES                 
-                            (@First_Name
-                            ,@Last_Name
+                            (@Display_Name
                             ,@Profile_Picture
                             ,@User_Created_Date
                             ,@Firebase_Uid)";
