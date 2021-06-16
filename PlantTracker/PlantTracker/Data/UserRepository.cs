@@ -31,12 +31,12 @@ namespace PlantTracker.Data
                         WHERE [User].Id = @id";
             return db.QueryFirstOrDefault<User>(sql, new { id = id });
         }
-        public User GetUserByFirebaseUid(int uid)
+        public User GetUserByFirebaseUid(string uid)
         {
             using var db = new SqlConnection(ConnectionString);
             var sql = @"SELECT * 
                         FROM [User]
-                        WHERE [User].FirebaseUid = @uid";
+                        WHERE [User].Firebase_Uid = @uid";
             return db.QueryFirstOrDefault<User>(sql, new { uid = uid });
         }
         public void CreateUser(User user)
@@ -46,11 +46,15 @@ namespace PlantTracker.Data
             user.User_Created_Date = User_Created_Date;
             var sql = @"INSERT INTO [dbo].[User]
                             ([Display_Name]
+                            ,[First_Name]
+                            ,[Last_Name]
                             ,[Profile_Picture]
                             ,[User_Created_Date]
                             ,[Firebase_Uid])
                         VALUES                 
                             (@Display_Name
+                            ,@Display_Name
+                            ,@Display_Name
                             ,@Profile_Picture
                             ,@User_Created_Date
                             ,@Firebase_Uid)";

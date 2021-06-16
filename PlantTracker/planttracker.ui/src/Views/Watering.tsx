@@ -14,7 +14,7 @@ class Watering extends Component<PlantProps> {
     user: this.props.user.user,
   };
   componentDidMount(): void {
-    PlantData.getPlantsForSingleUser(1).then((response: Plant[]) => {
+    PlantData.getPlantsForSingleUser(this.state.user.id).then((response: Plant[]) => {
       PlantData.getUserPlants(1).then((userPlantResponse) => {
         this.setState({
           plants: response,

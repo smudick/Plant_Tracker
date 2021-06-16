@@ -20,6 +20,7 @@ class Auth extends Component<AuthProps> {
           image_Url: user.user?.photoURL,
           firebase_Uid: user.user?.uid,
         }
+        console.log(userInfo);
         UserData.addNewUser(userInfo);
         window.location.href = '/';
       }
