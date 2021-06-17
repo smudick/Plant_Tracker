@@ -11,6 +11,7 @@ namespace PlantTracker.Models
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
         public string Profile_Picture { get; set; }
+        public string Display_Name { get; set; }
         public DateTime User_Created_Date { get; set; }
         public string Firebase_Uid { get; set; }
     }

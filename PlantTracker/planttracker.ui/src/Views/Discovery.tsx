@@ -7,7 +7,7 @@ import PlantCard from "../Components/Cards/PlantCard";
 class Discovery extends Component<DiscoveryProps> {
   state = {
     plants: [],
-    user: this.props.user,
+    user: this.props.user.user,
     filteredPlants: [],
     questionNumber: 0,
   };

@@ -32,7 +32,7 @@ namespace PlantTracker.Controllers
             return Ok(_repo.GetUserById(id));
         }  
         [HttpGet("firebase/{uid}")]
-        public IActionResult GetUserByFirebaseUid(int uid)
+        public IActionResult GetUserByFirebaseUid(string uid)
         {
             return Ok(_repo.GetUserByFirebaseUid(uid));
         }
