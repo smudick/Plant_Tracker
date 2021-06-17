@@ -50,7 +50,7 @@ class Auth extends Component<AuthProps> {
           <div className="d-flex align-items-center">
             <p>Hello, {user?.display_Name}!</p>
             <button className="google-logo ml-4 logout-button" data-toggle="tooltip" data-placement="bottom" title="Log Out" onClick={this.logoutClickEvent}>
-              <i className="fas fa-sign-out-alt signout-icon"></i>
+              <i className="fas fa-sign-out-alt signout-icon">Log Out</i>
             </button>
           </div>
         </div>

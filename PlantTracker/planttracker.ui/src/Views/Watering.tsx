@@ -1,32 +1,34 @@
 import { Component } from "react";
 import {
-  PlantProps,
   Plant,
   UserPlant,
 } from "../Helpers/Interfaces/PlantInterfaces";
+import {UserProps} from '../Helpers/Interfaces/UserInterface';
 import PlantData from "../Helpers/Data/PlantData";
 import PlantCard from "../Components/Cards/PlantCard";
 
-class Watering extends Component<PlantProps> {
+class Watering extends Component<UserProps> {
   state = {
     plants: [],
     userPlants: [],
     user: this.props.user.user,
   };
   componentDidMount(): void {
-    PlantData.getPlantsForSingleUser(this.state.user.id).then((response: Plant[]) => {
-      PlantData.getUserPlants(1).then((userPlantResponse) => {
-        this.setState({
-          plants: response,
-          userPlants: userPlantResponse,
+    if (this.state.user) {
+      PlantData.getPlantsForSingleUser(this.state.user.id).then((response: Plant[]) => {
+        PlantData.getUserPlants(this.state.user.id).then((userPlantResponse) => {
+          this.setState({
+            plants: response,
+            userPlants: userPlantResponse,
+          });
         });
       });
-    });
+    }
   }
 
   onUpdate(): void {
-    PlantData.getPlantsForSingleUser(1).then((response: Plant[]) => {
-      PlantData.getUserPlants(1).then((userPlantResponse) => {
+    PlantData.getPlantsForSingleUser(this.state.user.id).then((response: Plant[]) => {
+      PlantData.getUserPlants(this.state.user.id).then((userPlantResponse) => {
         this.setState({
           plants: response,
           userPlants: userPlantResponse,

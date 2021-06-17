@@ -25,15 +25,15 @@ const Navigation = (user : User): JSX.Element => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/watering">Watering Schedule</NavLink>
+              <NavLink href="/watering" user={user}>Watering Schedule</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/discovery">Discovery</NavLink>
+              <NavLink href="/discovery" user={user}>Discovery</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/browse" user={user}>Browse</NavLink>
             </NavItem>
-            <Search user={user.user}/>
+            <Search user={user}/>
           </Nav>
         </Collapse>
         <Auth user={user.user} />
