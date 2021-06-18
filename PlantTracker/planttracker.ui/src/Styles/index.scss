@@ -1,5 +1,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
 @import 'plants';
+@import 'nav';
+@import 'variables';
 
 body {
   margin: 0;
@@ -8,6 +11,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: $SchemeNeutral;
+  font-family: 'Inter', sans-serif;
 }
 
 code {

@@ -1,0 +1,87 @@
+@import 'variables';
+
+.navbar {
+    background-color: $SchemeDarkGreen;
+    display: flex;
+    color: white;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+}
+.nav-link {
+    color: white;
+    margin: 4px;
+    font-size: 17px;
+}
+.leaf-icon {
+    font-size: 28px;
+    color: $SchemeGreen;
+    margin-right: 9px
+}
+.nav-link:hover {
+    color: $SchemeGreen;
+}
+.navbar-brand {
+    color: $SchemeGreen;
+    font-family: 'Damion', cursive;
+    font-size: 32px;
+    margin-right: 25px;
+    margin-top: -5px;
+}
+.navbar-brand:hover {
+    color: white;
+}
+.search { 
+    height: 30px;
+    width: 500px;
+    border-radius: 7px; 
+    margin-right: 550px;
+    -webkit-box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.2); 
+    box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.2);
+    color: rgb(48, 48, 48);
+    text-align: center;
+    background-color: $SchemeNeutral;
+}
+
+.search::placeholder {
+    color: rgba(68, 68, 68, 0.849);
+}
+
+.search:focus {
+    outline: none;
+}
+
+.auth {
+    display: flex;
+    flex-flow: nowrap row;
+    margin-top: 5px;
+}
+
+.username {
+    margin-top: 5px;
+}
+
+.logout-button {
+    border: none;
+    color: #fff;
+    background-color: $SchemeTan;
+    border-radius: 7px;
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+    padding: 0 15px;
+    height: 35px;
+}
+
+.login-button {
+    border: none;
+    color: #000;
+    background-color: $SchemeGreen;
+    border-radius: 7px;
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px px rgba(0, 0, 0, 0.1);
+    padding: 0 15px;
+    height: 35px;
+}
+
+.logout-button:hover, .login-button:hover {
+    filter: saturate(60%);
+  }
