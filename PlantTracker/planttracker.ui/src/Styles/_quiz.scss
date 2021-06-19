@@ -1,5 +1,6 @@
 .quizContainer {
     margin: 3em;
+
 }
 
 .quiz {
@@ -10,7 +11,9 @@
     border-radius: 15px;
     -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
-    padding: 2em;
+    padding: 5em 2em;
+    margin: 0 15em;
+    justify-self: center;
 }
 
 .question {
@@ -26,16 +29,3 @@
     color: $SchemeGreen;
 }
 
-.quizStartButton {
-    margin: 3em;
-    font-size: 24px;
-    border-radius: 30px;
-    background-color: $SchemeGreen;
-    padding: 1em 2em;
-    border: none;
-}
-
-.quizStartButton:hover {
-    filter: saturate(200%);
-    color: #FFF;
-}
