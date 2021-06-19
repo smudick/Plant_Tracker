@@ -62,7 +62,7 @@ export default class PlantCard extends Component<PlantProps> {
             </button>
             }
             {water && 
-              <button onClick={() => this.props.waterPlant(this.props.userPlant)}>
+              <button className="waterButton" onClick={() => this.props.waterPlant(this.props.userPlant)}>
                 Water Plant
               </button>
             }
