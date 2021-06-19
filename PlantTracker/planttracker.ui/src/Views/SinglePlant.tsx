@@ -130,67 +130,74 @@ class SinglePlant extends Component<PlantProps> {
     if (date === "0001-01-01T00:00:00") {
       return "No date set or recorded";
     } else {
-        const formattedDate = new Date(date).toLocaleDateString(
-            'en-us', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }
-        )
+      const formattedDate = new Date(date).toLocaleDateString("en-us", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
       return formattedDate;
     }
   };
 
   render(): JSX.Element {
     const { plant, type, userPlant, user, added } = this.state;
-    
+
     return (
-      <div className="d-flex flex-column align-items-center m-2">
-        {added && <h1>Plant has been added!</h1>}
-        <h1>{plant.common_Name}</h1>
-        <h4>
-          <em>{plant.scientific_Name}</em>
-        </h4>
-        <h5>{type}</h5>
-        <img className="single-plant-image"src={plant.image_Url}></img>
-        <div className="d-flex justify-content-center">
-          <div className="m-3">
-            <h2>Care Recommendations</h2>
-            <p>Soil pH: {plant.ph_Soil}</p>
-            <p>Amount of Sun: {this.shadeCalc(plant.shade)}</p>
-            <p>Moisture Usage: {this.moistureCalc(plant.moisture_Use)}</p>
-            <p>
-              Soil watering indicator:{" "}
-              {this.waterIndicatorCalc(plant.soil_Watering_Indicator)}
-            </p>
-          </div>
-          {userPlant && (
-            <div className="m-3">
-              <h2>Plant Information</h2>
-              <p>Bloom color: {this.bloomCalc(plant.bloom)}</p>
-              <p>Days between each watering: {userPlant.user_Water_Time}</p>
-              <p>
-                Last watered date: {this.dateCheck(userPlant.last_Watered_Date)}
-              </p>
-              <p>
-                Next scheduled watering date:{" "}
-                {this.dateCheck(userPlant.next_Watered_Date)}
-              </p>
-              <p>Notes: {userPlant.notes}</p>
-              <UpdatePlantModal
-                user={user}
-                plant={plant}
-                userPlant={userPlant}
-                onUpdate={this.onUpdate}
-              >
-                Edit
-              </UpdatePlantModal>
+      <div className="d-flex justify-content-center">
+        <div className="single-plant-container">
+          {added && <h1>Plant has been added!</h1>}
+            <img className="single-plant-image" src={plant.image_Url}></img>
+          <div className='d-flex '>
+            <div className="single-plant-header">
+              <h1>{plant.common_Name}</h1>
+              <h4>
+                <em>{plant.scientific_Name}</em>
+              </h4>
+              <h5>{type}</h5>
             </div>
+          </div>
+          <div className="d-flex">
+            <div className="care-recs">
+              <h2>Care Recommendations</h2>
+              <p>Soil pH: {plant.ph_Soil}</p>
+              <p>Amount of Sun: {this.shadeCalc(plant.shade)}</p>
+              <p>Moisture Usage: {this.moistureCalc(plant.moisture_Use)}</p>
+              <p>
+                Soil watering indicator:{" "}
+                {this.waterIndicatorCalc(plant.soil_Watering_Indicator)}
+              </p>
+            </div>
+            {userPlant && (
+              <div className="plant-info">
+                <h2>Plant Information</h2>
+                <p>Bloom color: {this.bloomCalc(plant.bloom)}</p>
+                <p>Days between each watering: {userPlant.user_Water_Time}</p>
+                <p>
+                  Last watered date:{" "}
+                  {this.dateCheck(userPlant.last_Watered_Date)}
+                </p>
+                <p>
+                  Next scheduled watering date:{" "}
+                  {this.dateCheck(userPlant.next_Watered_Date)}
+                </p>
+                <p>Notes: {userPlant.notes}</p>
+                <UpdatePlantModal
+                  user={user}
+                  plant={plant}
+                  userPlant={userPlant}
+                  onUpdate={this.onUpdate}
+                >
+                  Edit
+                </UpdatePlantModal>
+              </div>
+            )}
+          </div>
+          {userPlant === null && (
+            <button className="addPlantButton" onClick={() => this.addPlant(user, plant)}>
+              Add Plant
+            </button>
           )}
         </div>
-        {userPlant === null && (
-          <button onClick={() => this.addPlant(user, plant)}>Add Plant</button>
-        )}
       </div>
     );
   }

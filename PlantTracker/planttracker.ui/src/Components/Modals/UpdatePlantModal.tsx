@@ -8,7 +8,7 @@ const UpdatePlantModal = ({user, plant, userPlant, onUpdate}: UserPlantProps): J
     const toggle = () => setModal(!modal);
     return (
         <div>
-          <button onClick={toggle}>Update Plant</button>
+          <button className="updatePlantButton"onClick={toggle}>Update Plant</button>
            <Modal isOpen={modal} toggle={toggle}>
                 <UpdatePlantForm user={user} plant={plant} userPlant={userPlant} onUpdate={onUpdate}/>
           </Modal>

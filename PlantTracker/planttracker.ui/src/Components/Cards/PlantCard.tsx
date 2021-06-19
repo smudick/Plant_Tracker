@@ -57,7 +57,7 @@ export default class PlantCard extends Component<PlantProps> {
               {plant.scientific_Name}
             </CardSubtitle>
             {homePage===false&& 
-            <button onClick={() => this.addPlant(user, plant)}>
+            <button className="addPlantButton" onClick={() => this.addPlant(user, plant)}>
               Add Plant
             </button>
             }
