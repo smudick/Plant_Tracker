@@ -1,0 +1,21 @@
+.filterButtons {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    padding: 1em;
+    width: 80%;
+}
+.filterContainer {
+    display: flex;
+    margin: 1em;
+    border-radius: 10px;
+    flex-flow: nowrap column;
+    align-items: center;
+    width: 40%;
+    background-color: $SchemeGrey;
+    color: white;
+    padding: 1em;
+}
+.check {
+    margin: 10px;
+}

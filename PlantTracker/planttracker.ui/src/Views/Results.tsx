@@ -59,7 +59,7 @@ export default class Results extends Component<SearchProps, SearchState> {
     } else {
       cards = [
         <div className="d-flex align-items-center flex-column">
-          <h1 className="mt-4 mb-4">No Plants Found</h1>
+          <h2 className="mt-4 mb-4">No Plants Found</h2>
           <h5 className="mt-4 mb-2">We don't have any plants in our database with a common or scientific name matching your search critera.</h5>
           <h5 className="mt-2 mb-4">Don't think we have what you're looking for? Add your own custom plant below!</h5>
           <CreatePlantModal user={user}/>
@@ -69,7 +69,13 @@ export default class Results extends Component<SearchProps, SearchState> {
 
     return (
       <div>
-        <div className="d-flex flex-wrap justify-content-center">{cards}</div>
+        <div className="d-flex flex-wrap flex-column align-items-center justify-content-center">
+          <h1 className="m-4">Search Results</h1>
+          <div className="d-flex">
+
+          {cards}
+          </div>
+          </div>
       </div>
     );
   }

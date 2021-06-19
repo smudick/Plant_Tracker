@@ -86,9 +86,9 @@ class Watering extends Component<UserProps> {
         );
       });
       return (
-        <div>
-          <h2>{date}</h2>
-          <div className="d-flex justify-content-center flex-wrap">
+        <div className="d-flex flex-column align-items-center">
+          <h2 className="date">{date}</h2>
+          <div className="waterCards">
             {plantCards}
           </div>
         </div>
@@ -99,8 +99,8 @@ class Watering extends Component<UserProps> {
     );
     return (
       <div>
-        <h1>Watering</h1>
-        <div>{dates}</div>
+        <h1 className="m-4">Watering</h1>
+        <div className="m-4">{dates}</div>
       </div>
     );
   }
