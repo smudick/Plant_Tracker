@@ -5,7 +5,7 @@ import PlantCard from "../Components/Cards/PlantCard";
 import { User, UserProps } from "../Helpers/Interfaces/UserInterface";
 import UserData from "../Helpers/Data/UserData";
 import { PlantType } from "../Helpers/Interfaces/PlantType";
-import { CustomInput, Label, Form, FormGroup } from "reactstrap";
+import { CustomInput, Label, Form } from "reactstrap";
 
 type BrowseState = {
   plants?: Plant[];
@@ -90,6 +90,7 @@ class Browse extends Component<UserProps> {
       return (
         <CustomInput
           type="checkbox"
+          className="check"
           id={plantType.id}
           label={plantType.type}
           value={plantType.id}
@@ -102,16 +103,14 @@ class Browse extends Component<UserProps> {
     return (
       <div className="d-flex align-items-center flex-column">
         <h1 className="mt-4">Browse</h1>
-        <Form>
-          <FormGroup>
-            <Label for="exampleCheckbox">Filter by plant type</Label>
+        <div className="filterContainer">
+            <h5>Filter by plant type</h5>
             {this.state.types.length && (
-              <div className="d-flex flex-column align-items-start">
+              <div className="filterButtons">
                 {filterButtons}
               </div>
             )}
-          </FormGroup>
-        </Form>
+        </div>
         <div className="d-flex flex-wrap justify-content-center">{cards}</div>
       </div>
     );
