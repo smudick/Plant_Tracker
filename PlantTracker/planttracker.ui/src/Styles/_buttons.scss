@@ -31,7 +31,7 @@
 .addPlantButton {
     border-radius: 10px;
     background-color: $SchemeDarkGreen;
-    padding: 1em;
+    padding: .7em 1em;
     border: none;
     color: #fff;
     -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
@@ -42,5 +42,21 @@
 
 .addPlantButton:hover {
     filter: saturate(150%);
+    color: $SchemeGreen;
+}
+
+.waterButton {
+    border-radius: 10px;
+    background-color: rgb(33, 129, 219);
+    padding: .7em 1em;
+    border: none;
+    color: #fff;
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    margin: 1em;
+}
+.waterButton:hover {
+    filter: saturate(170%);
     color: $SchemeGreen;
 }
