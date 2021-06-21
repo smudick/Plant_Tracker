@@ -1,0 +1,29 @@
+.cardAlert {
+    background-color: $SchemeDarkGreen;
+    color: white;
+    padding: 10px 10px 0 10px;
+    margin-bottom: 1em;
+    border-radius: 10px;
+}
+.formAlert {
+    background-color: $SchemeDarkGreen;
+    color: white;
+    width: 100%;
+    padding: 1em 1em .5em 1em;
+    margin-bottom: 1em;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.customPlantForm {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin: 1em;
+}
+
+.createPlantModal {
+    width: 650px;
+    margin-left: -50px
+}
