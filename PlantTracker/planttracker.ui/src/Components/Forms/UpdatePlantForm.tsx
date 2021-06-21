@@ -4,7 +4,7 @@ import {
   Plant,
   UserPlantProps,
 } from "../../Helpers/Interfaces/PlantInterfaces";
-import { Col, Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Col, Button, Form, FormGroup, Input, Label, Alert } from "reactstrap";
 import DateSelector from "./DatePicker";
 
 export default class UpdatePlantForm extends Component<UserPlantProps> {
@@ -55,13 +55,13 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
     return (
       <div>
           {this.state.updated && (
-              <div>
-                  <h2>Plant Info Updated!</h2>
-              </div>
+              <Alert color="success" className="d-flex justify-content-center">
+                  <h4>Plant Info Updated!</h4>
+              </Alert>
           )}
           <div className="d-flex justify-content-center">
 
-        <h1>Update Plant Info</h1>
+        <h1 className='m-4'>Update Plant Info</h1>
           </div>
         <Form onSubmit={this.handleSubmit} className="d-flex flex-column justify-content-center m-3">
           <FormGroup row>

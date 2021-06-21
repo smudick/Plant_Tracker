@@ -1,10 +1,17 @@
 import { Component } from "react";
 import { PlantProps } from "../../Helpers/Interfaces/PlantInterfaces";
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Alert,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import PlantData from "../../Helpers/Data/PlantData";
 import { User } from "../../Helpers/Interfaces/UserInterface";
-import { Plant} from "../../Helpers/Interfaces/PlantInterfaces";
+import { Plant } from "../../Helpers/Interfaces/PlantInterfaces";
 
 export default class PlantCard extends Component<PlantProps> {
   state = {
@@ -12,7 +19,7 @@ export default class PlantCard extends Component<PlantProps> {
     user: this.props.user,
     added: false,
     homePage: this.props.homePage,
-    water: this.props.water
+    water: this.props.water,
   };
 
   addPlant = (user: User, plant: Plant): void => {
@@ -23,19 +30,21 @@ export default class PlantCard extends Component<PlantProps> {
     };
     PlantData.addPlantToUser(userPlant);
     this.setState({
-        added: true
-    })
+      added: true,
+    });
     setTimeout(() => this.setState({ added: false }), 3000);
   };
-  
+
   render(): JSX.Element {
-    const { plant, user, added, homePage, water} = this.state;
+    const { plant, user, added, homePage, water } = this.state;
     return (
       <div>
-          {added && 
-            <h2>This plant has been added to your home!</h2>
-          }
         <Card className="plant-card">
+          {added && (
+            <div className="cardAlert">
+              <p>This plant has been added to your home!</p>
+            </div>
+          )}
           <Link
             to={{
               pathname: "/details",
@@ -56,16 +65,22 @@ export default class PlantCard extends Component<PlantProps> {
             <CardSubtitle tag="h6" className="mb-2 text-muted">
               {plant.scientific_Name}
             </CardSubtitle>
-            {homePage===false&& 
-            <button className="addPlantButton" onClick={() => this.addPlant(user, plant)}>
-              Add Plant
-            </button>
-            }
-            {water && 
-              <button className="waterButton" onClick={() => this.props.waterPlant(this.props.userPlant)}>
+            {homePage === false && (
+              <button
+                className="addPlantButton"
+                onClick={() => this.addPlant(user, plant)}
+              >
+                Add Plant
+              </button>
+            )}
+            {water && (
+              <button
+                className="waterButton"
+                onClick={() => this.props.waterPlant(this.props.userPlant)}
+              >
                 Water Plant
               </button>
-            }
+            )}
           </CardBody>
         </Card>
       </div>

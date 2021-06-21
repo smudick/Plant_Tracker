@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Col, Button, Form, FormGroup, Input, Label, Alert } from "reactstrap";
 import PlantData from "../../Helpers/Data/PlantData";
 import { PlantType } from "../../Helpers/Interfaces/PlantType";
 import firebase from "firebase/app";
@@ -47,7 +47,6 @@ export default class CreatePlantForm extends Component<any> {
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.name === "filename" && e.target.files) {
-      firebaseApp()
       this.setState({ Image_Url: "" });
       const storageRef = firebase.storage().ref();
       const imageRef = storageRef.child(
@@ -76,7 +75,6 @@ export default class CreatePlantForm extends Component<any> {
     });
   };
   handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
-    //debugger// eslint-disable-line no-debugger
     e.preventDefault();
     const plant = {
       Scientific_Name: this.state.Scientific_Name,
@@ -126,13 +124,13 @@ export default class CreatePlantForm extends Component<any> {
     };
     const options = createTypeOptions(this.plantTypes);
     return (
-      <div>
+      <div className="customPlantForm">
         {this.state.created && (
-          <div>
-            <h2>Plant Created</h2>
+          <div color="success" className="formAlert">
+            <h5>Plant Created</h5>
           </div>
         )}
-        <div className="d-flex align-items-center flex-column">
+        <div>
           <h1>Create a Custom Plant</h1>
           <p className="mt-3">
             Please fill out the following fields to the best of your knowledge.
@@ -155,7 +153,6 @@ export default class CreatePlantForm extends Component<any> {
                 id="Common_Name"
                 value={this.state.Common_Name}
                 onChange={this.handleChange}
-                placeholder="Common Name"
                 className={`form-control-lg`}
                 required
               />
@@ -172,7 +169,6 @@ export default class CreatePlantForm extends Component<any> {
                 id="Scientific_Name"
                 value={this.state.Scientific_Name}
                 onChange={this.handleChange}
-                placeholder="Scientific Name"
                 className={`form-control-lg`}
               />
             </Col>

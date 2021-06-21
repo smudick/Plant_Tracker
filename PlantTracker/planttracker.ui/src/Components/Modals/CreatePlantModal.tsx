@@ -3,13 +3,13 @@ import { Modal } from 'reactstrap';
 import {User} from '../../Helpers/Interfaces/UserInterface';
 import CreatePlantForm from '../Forms/CreatePlantForm';
 
-const CreatePlantModal = ({user}: any): JSX.Element => {
+const CreatePlantModal = ({user}: User): JSX.Element => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     return (
-        <div>
-          <button onClick={toggle}>Create Custom Plant</button>
-           <Modal isOpen={modal} toggle={toggle}>
+        <div className="d-flex justify-content-center flex-row">
+          <button className="addPlantButton" onClick={toggle}>Create Custom Plant</button>
+           <Modal contentClassName="createPlantModal" isOpen={modal} toggle={toggle}>
            <CreatePlantForm user={user}/>
           </Modal>
         </div>
