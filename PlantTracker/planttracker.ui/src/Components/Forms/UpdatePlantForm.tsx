@@ -14,6 +14,7 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
     nextWaterDate: this.props.userPlant.next_Watered_Date,
     onUpdate: this.props.onUpdate,
     updated: false,
+    name: this.props.userPlant.name
   };
 
   handleChange = (
@@ -29,6 +30,7 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
       Id: this.props.userPlant.id,
       User_Id: this.props.userPlant.user_Id,
       Plant_Id: this.props.userPlant.plant_Id,
+      Name: this.state.name,
       Last_Watered_Date: this.props.userPlant.last_Watered_Date,
       Next_Watered_Date: this.state.nextWaterDate,
       Notes: this.state.notes,
@@ -65,6 +67,22 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
           </div>
         <Form onSubmit={this.handleSubmit} className="d-flex flex-column justify-content-center m-3">
           <FormGroup row>
+            <Label for="name" sm={10}>
+              Set a Nickname for Your Plant
+            </Label>
+            <Col sm={10}>
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+                className={`form-control-lg`}
+                required
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
             <Label for="waterInterval" sm={10}>
               Set The Amount Of Days Between Waterings
             </Label>
@@ -91,7 +109,6 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
                 name="notes"
                 value={this.state.notes}
                 onChange={this.handleChange}
-                placeholder="Plant Notes"
                 className={`form-control-lg`}
               />
             </Col>

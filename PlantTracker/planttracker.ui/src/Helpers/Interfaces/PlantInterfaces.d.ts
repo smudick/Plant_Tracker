@@ -29,6 +29,7 @@ declare module "PlantTypes" {
       Next_Watered_Date: Date;
       Notes: String;
       User_Water_Time: number;
+      Name: string;
   }
   type PlantProps = {
       plant: Plant,

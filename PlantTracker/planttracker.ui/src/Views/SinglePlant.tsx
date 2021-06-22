@@ -22,7 +22,7 @@ class SinglePlant extends Component<PlantProps> {
     plant: this.props.location.state.plant,
     type: "",
     user: this.props.location.state.user,
-    userPlant: null,
+    userPlant: this.props.location.state.userPlant,
     added: false,
   };
 
@@ -32,33 +32,14 @@ class SinglePlant extends Component<PlantProps> {
         type: response.type,
       });
     });
-    if (this.state.user) {
-      PlantData.getUserPlants(this.state.user.id).then((response) => {
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].plant_Id === this.state.plant.id) {
-            this.setState({
-              userPlant: response[i],
-            });
-          }
-        }
-      });
-    } else {
-      this.setState({
-        userPlant: {},
-      });
-    }
   };
   onUpdate = (): void => {
-    PlantData.getUserPlants(this.state.user.id).then((response) => {
-      for (let i = 0; i < response.length; i++) {
-        if (response[i].plant_Id === this.state.plant.id) {
+    PlantData.getUserPlantById(this.state.userPlant.id).then((response: UserPlant) => {
           this.setState({
-            userPlant: response[i],
+            userPlant: response,
           });
-        }
+        });
       }
-    });
-  };
 
   addPlant = (user: User, plant: Plant): void => {
     const userPlant = {
@@ -171,6 +152,7 @@ class SinglePlant extends Component<PlantProps> {
               <div className="plant-info">
                 <h2>Plant Information</h2>
                 <p>Bloom color: {this.bloomCalc(plant.bloom)}</p>
+                <p>Plant Nickname: {userPlant.name}</p>
                 <p>Days between each watering: {userPlant.user_Water_Time}</p>
                 <p>
                   Last watered date:{" "}

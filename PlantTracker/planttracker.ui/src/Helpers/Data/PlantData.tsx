@@ -17,6 +17,22 @@ const getAllPlants = (): Promise<Plant> =>
       .catch((error) => reject(error));
   });
 
+  const getPlantById = (id: number): Promise<Plant> =>
+    new Promise((resolve, reject) => {
+      axios.get(`${plantUrl}/${id}`).then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => reject(error));
+  });
+  
+  const getUserPlantById = (id: number): Promise<UserPlant> =>
+    new Promise((resolve, reject) => {
+      axios.get(`${userPlantUrl}/${id}`).then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => reject(error));
+  });
+
 const getPlantType = (id: number): Promise<PlantType> =>
   new Promise((resolve, reject) => {
     axios
@@ -118,6 +134,8 @@ const PlantData = {
   waterPlant,
   getAllTypes,
   addCustomPlant,
-  getMostRecentUserPlant
+  getMostRecentUserPlant,
+  getPlantById,
+  getUserPlantById
 };
 export default PlantData;
