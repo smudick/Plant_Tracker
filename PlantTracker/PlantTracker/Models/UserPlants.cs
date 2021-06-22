@@ -14,5 +14,6 @@ namespace PlantTracker.Models
         public DateTime Next_Watered_Date { get; set; }
         public string Notes { get; set; }
         public int User_Water_Time { get; set; }
+        public string Name { get; set; }
     }
 }

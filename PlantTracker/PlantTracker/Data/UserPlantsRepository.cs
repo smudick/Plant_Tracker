@@ -55,12 +55,14 @@ namespace PlantTracker.Data
                             ([User_Id]
                             ,[Plant_Id]
                             ,[Notes]
-                            ,[User_Water_Time])
+                            ,[User_Water_Time]
+                            ,[Name])
                        VALUES                 
                             (@User_Id
                             ,@Plant_Id
                             ,@Notes
-                            ,@User_Water_Time)";
+                            ,@User_Water_Time
+                            ,@Name)";
             var id = db.ExecuteScalar<int>(sql, userPlants);
             userPlants.Id = id;
         }
@@ -90,7 +92,8 @@ namespace PlantTracker.Data
                             SET
                                 [Notes] = @Notes,
 		                        [User_Water_Time] = @User_Water_Time,
-                                [Next_Watered_Date] = @Next_Watered_Date
+                                [Next_Watered_Date] = @Next_Watered_Date,
+                                [Name] = @Name
                             WHERE [User_Plants].id = @id";
             db.Execute(sql, userPlant);
         }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PlantData from "../Helpers/Data/PlantData";
-import { Plant } from "../Helpers/Interfaces/PlantInterfaces";
+import { Plant, UserPlant } from "../Helpers/Interfaces/PlantInterfaces";
 import PlantCard from "../Components/Cards/PlantCard";
 import { User } from "../Helpers/Interfaces/UserInterface";
 import UserData from "../Helpers/Data/UserData";
@@ -13,10 +13,16 @@ class Home extends Component<HomeProps> {
   state = {
     plants: [],
     user: this.props.user.user,
+    userPlants: []
   };
 
   componentDidMount(): void {
     if (this.state.user) {
+      PlantData.getUserPlants(this.state.user.id).then((userPlantResponse: UserPlant) => {
+        this.setState({
+          userPlants: userPlantResponse
+        })
+      })
       PlantData.getPlantsForSingleUser(this.state.user.id).then(
         (plantResponse: Plant[]) => {
           this.setState({
@@ -27,19 +33,19 @@ class Home extends Component<HomeProps> {
     }
   }
   render(): JSX.Element {
-    const { plants, user } = this.state;
-    const plantCard = (plant: Plant): JSX.Element => {
+    const { plants, user, userPlants } = this.state;
+    const plantCard = (userPlant: UserPlant): JSX.Element => {
       return (
         <PlantCard
-          key={plant.id}
-          plant={plant}
+          key={userPlant.id}
           user={user}
           homePage={true}
           water={false}
+          userPlant={userPlant}
         />
       );
     };
-    const cards = plants?.map(plantCard);
+    const cards = userPlants?.map(plantCard);
     return (
       <div>
         {user && (
