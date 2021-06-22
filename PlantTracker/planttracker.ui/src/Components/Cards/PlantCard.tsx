@@ -19,11 +19,11 @@ export default class PlantCard extends Component<PlantProps> {
     added: false,
     homePage: this.props.homePage,
     water: this.props.water,
-    userPlant: this.props.userPlant || null
+    userPlant: this.props.userPlant || null,
+    watered: true
   };
   componentDidMount = (): void => {
     if (this.state.user && this.state.userPlant) {
-
       if (this.state.plant === null) {
         PlantData.getPlantById(this.state.userPlant.plant_Id).then((response) => {
           this.setState({
@@ -31,6 +31,15 @@ export default class PlantCard extends Component<PlantProps> {
           })
         })
       }
+     if (Date.parse(this.state.userPlant.next_Watered_Date) < Date.now()) {
+        this.setState({
+          watered: false
+        })
+     } else {
+      this.setState({
+        watered: true
+      })
+     }
     }
   }
 
@@ -52,9 +61,8 @@ export default class PlantCard extends Component<PlantProps> {
     return (
       <>
       {plant && (
-
         <div>
-        <Card className="plant-card">
+        <Card className={`plant-card ${this.state.watered ? 'healthy': 'dry'}`}>
           {added && (
             <div className="cardAlert">
               <p>This plant has been added to your home!</p>
@@ -97,7 +105,12 @@ export default class PlantCard extends Component<PlantProps> {
             {water && (
               <button
               className="waterButton"
-              onClick={() => this.props.waterPlant(this.props.userPlant)}
+              onClick={() => {
+                this.props.waterPlant(this.props.userPlant)
+                this.setState({
+                  watered: true
+                })
+              }}
               >
                 Water Plant
               </button>

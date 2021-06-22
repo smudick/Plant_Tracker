@@ -14,7 +14,8 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
     nextWaterDate: this.props.userPlant.next_Watered_Date,
     onUpdate: this.props.onUpdate,
     updated: false,
-    name: this.props.userPlant.name
+    name: this.props.userPlant.name,
+    dateError: false
   };
 
   handleChange = (
@@ -36,15 +37,22 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
       Notes: this.state.notes,
       User_Water_Time: parseInt(this.state.waterInterval),
     };
-    PlantData.updateUserPlant(userPlant).then(() => {
-      this.setState({
-        updated: true,
+    if (this.state.nextWaterDate !== '0001-01-01T00:00:00') {
+      PlantData.updateUserPlant(userPlant).then(() => {
+        this.setState({
+          updated: true,
+        });
+        if (this.props.onUpdate) {
+          this.props.onUpdate();
+        }
+        setTimeout(() => this.setState({ updated: false }), 3000);
       });
-      if (this.props.onUpdate) {
-        this.props.onUpdate();
-      }
-      setTimeout(() => this.setState({ updated: false }), 3000);
-    });
+    } else {
+      this.setState({
+        dateError: true
+      })
+      setTimeout(() => this.setState({ dateError: false }), 3000);
+    }
   };
 
   getDate = (selection: Date): void => {
@@ -59,6 +67,11 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
           {this.state.updated && (
               <Alert color="success" className="d-flex justify-content-center">
                   <h4>Plant Info Updated!</h4>
+              </Alert>
+          )}
+           {this.state.dateError && (
+              <Alert color="warning" className="d-flex justify-content-center">
+                  <h4>Please set a date for the next watering</h4>
               </Alert>
           )}
           <div className="d-flex justify-content-center">
@@ -78,7 +91,6 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
                 value={this.state.name}
                 onChange={this.handleChange}
                 className={`form-control-lg`}
-                required
               />
             </Col>
           </FormGroup>
@@ -120,7 +132,7 @@ export default class UpdatePlantForm extends Component<UserPlantProps> {
             <Col sm={10}>
               <DateSelector
                 getDate={this.getDate}
-                currentDate={this.state.nextWaterDate}
+                currentDate={Date.now()}
               />
             </Col>
           </FormGroup>
