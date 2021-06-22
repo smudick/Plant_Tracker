@@ -4,6 +4,7 @@ import { Plant } from "../Helpers/Interfaces/PlantInterfaces";
 import PlantCard from "../Components/Cards/PlantCard";
 import { User } from "../Helpers/Interfaces/UserInterface";
 import UserData from "../Helpers/Data/UserData";
+import Auth from '../Components/Auth';
 
 type HomeProps = {
   user: User;
@@ -20,12 +21,10 @@ class Home extends Component<HomeProps> {
         (plantResponse: Plant[]) => {
           this.setState({
             plants: plantResponse,
-            // user: response
           });
         }
       );
     }
-    // });
   }
   render(): JSX.Element {
     const { plants, user } = this.state;
@@ -49,6 +48,13 @@ class Home extends Component<HomeProps> {
             <div className="d-flex flex-wrap justify-content-center">
               {cards}
             </div>
+          </div>
+        )}
+        {!user && (
+          <div>
+            <h1 className="m-5">Welcome to Plant Tracker!</h1>
+            <h3 className='m-5'>Sign in to add some plants to your home</h3>
+            <Auth user={false}/>
           </div>
         )}
       </div>

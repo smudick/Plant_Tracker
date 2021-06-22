@@ -167,7 +167,7 @@ class SinglePlant extends Component<PlantProps> {
                 {this.waterIndicatorCalc(plant.soil_Watering_Indicator)}
               </p>
             </div>
-            {userPlant && (
+            {(userPlant && user) && (
               <div className="plant-info">
                 <h2>Plant Information</h2>
                 <p>Bloom color: {this.bloomCalc(plant.bloom)}</p>

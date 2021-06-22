@@ -141,6 +141,7 @@ class Discovery extends Component<DiscoveryProps> {
     }
     return (
       <div>
+        {user && (
         <div className="quizContainer">
           {questionNumber === 0 && (
             <div className="d-flex flex-column align-items-center">
@@ -295,6 +296,12 @@ class Discovery extends Component<DiscoveryProps> {
             </div>
           )}
         </div>
+        )}
+      {!user && (
+          <div>
+            <h4 className='m-4'>Please sign in or create an account to take the plant discovery quiz</h4>
+          </div>
+        )}
       </div>
     );
   }

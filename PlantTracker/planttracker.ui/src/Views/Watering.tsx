@@ -100,7 +100,14 @@ class Watering extends Component<UserProps> {
     return (
       <div>
         <h1 className="m-4">Watering</h1>
-        <div className="m-4">{dates}</div>
+        {user && (
+          <div className="m-4">{dates}</div>
+        )}
+        {!user && (
+          <div>
+            <h4>Please sign in or create an account to use the plant watering tracker</h4>
+          </div>
+        )}
       </div>
     );
   }
