@@ -35,6 +35,17 @@ class Browse extends Component<UserProps> {
           });
         });
       });
+    } else {
+      PlantData.getAllPlants().then((plantResponse: Plant[]) => {
+        PlantData.getAllTypes().then((typeResponse: PlantType[]) => {
+          this.setState({
+            plants: plantResponse,
+            selectedPlants: plantResponse,
+            types: typeResponse,
+            user: false
+          });
+        });
+      });
     }
   }
   statePlants: Plant[] = [];

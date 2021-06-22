@@ -7,7 +7,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Button,
 } from "reactstrap";
 import { User } from "../../Helpers/Interfaces/UserInterface";
 import Search from "./Search";
@@ -24,6 +23,8 @@ const Navigation = (user: User): JSX.Element => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
+              {user && (
+                <>
               <NavItem>
                 <NavLink href="/watering" user={user}>
                   Watering Schedule
@@ -34,6 +35,8 @@ const Navigation = (user: User): JSX.Element => {
                   Discovery
                 </NavLink>
               </NavItem>
+              </>
+              )}
               <NavItem>
                 <NavLink href="/browse" user={user}>
                   Browse

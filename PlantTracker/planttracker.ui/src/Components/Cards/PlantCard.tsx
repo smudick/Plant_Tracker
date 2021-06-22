@@ -65,7 +65,7 @@ export default class PlantCard extends Component<PlantProps> {
             <CardSubtitle tag="h6" className="mb-2 text-muted">
               {plant.scientific_Name}
             </CardSubtitle>
-            {homePage === false && (
+            {((homePage === false) && (user !== false)) && (
               <button
                 className="addPlantButton"
                 onClick={() => this.addPlant(user, plant)}
