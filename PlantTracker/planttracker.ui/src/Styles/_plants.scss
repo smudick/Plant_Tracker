@@ -15,8 +15,15 @@
   transition: transform .2s;
   -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
-  background-color: $SchemeGreen;
 }
 .plant-card:hover {
   transform: scale(1.05);
+}
+
+.dry {
+  background-color: $SchemeTan;
+  color: white;
+}
+.healthy {
+  background-color: $SchemeGreen;
 }
